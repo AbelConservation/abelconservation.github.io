@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI/ML Earth Observation — Sustainability & Commercial Landscape</title>
+<style>
+/* ─────────────────────────────────────────
+   ALL FONTS: System stack only — no Google Fonts dependency
+   Works identically on Windows, Mac, Linux, mobile
+───────────────────────────────────────── */
+:root {
+  --font-serif: Georgia, 'Times New Roman', serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'Cascadia Code', 'Fira Mono', 'Consolas', 'Courier New', monospace;
+
+  --bg: #f5f3ef;
+  --surface: #ffffff;
+  --surface2: #eeebe6;
+  --border: #d9d5cf;
+  --border-strong: #b0aa9f;
+  --text: #1a1714;
+  --text-dim: #5c5550;
+  --text-faint: #9a9490;
+  --ink: #1e1a16;
+
+  --cat-ag: #3d6b4a;
+  --cat-water: #1e5a9e;
+  --cat-forest: #2d5932;
+  --cat-climate: #5a3418;
+  --cat-insurance: #6a4db0;
+  --cat-energy: #9a4a08;
+  --cat-extractives: #6a3812;
+  --cat-supply: #a84a18;
+  --cat-esg: #0e4d7a;
+  --cat-urban: #4a5e20;
+  --cat-maritime: #0e5068;
+
+  --sec-bg: #fef8e8;
+  --sec-border: #c49010;
+  --sec-text: #7a4a08;
+  --sec-chip: #fdf0c8;
+
+  --sustain-bg: #eaf6ee;
+  --sustain-border: #1e9e50;
+  --sustain-text: #145c30;
+
+  --reg-bg: #e6effc;
+  --reg-border: #4a80d0;
+  --reg-text: #0e3070;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── HEADER ── */
+header {
+  background: var(--ink);
+  color: #f0ede8;
+  padding: 52px 52px 44px;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #80c090;
+  margin-bottom: 14px;
+}
+
+header h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(26px, 3.5vw, 44px);
+  font-weight: normal;
+  line-height: 1.18;
+  margin-bottom: 18px;
+  max-width: 780px;
+}
+
+header h1 em {
+  font-style: italic;
+  color: #85d0a0;
+}
+
+.header-sub {
+  color: #a8a09a;
+  max-width: 700px;
+  font-size: 14.5px;
+  line-height: 1.72;
+  margin-bottom: 26px;
+}
+
+.sustain-note {
+  display: flex;
+  gap: 12px;
+  background: rgba(30,158,80,0.1);
+  border: 1px solid rgba(30,158,80,0.28);
+  border-radius: 8px;
+  padding: 14px 18px;
+  max-width: 720px;
+  font-size: 13.5px;
+  color: #85d0a0;
+  line-height: 1.65;
+}
+.sustain-note strong { color: #b0f0c8; }
+
+/* ── LEGEND ── */
+.legend {
+  background: var(--surface2);
+  border-bottom: 2px solid var(--border);
+  padding: 16px 52px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  align-items: center;
+}
+.legend-lbl {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12.5px;
+  color: var(--text-dim);
+}
+.l-dot {
+  width: 10px; height: 10px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.legend-pill {
+  border-radius: 5px;
+  padding: 3px 10px;
+  font-size: 12px;
+}
+.legend-sec  { background: var(--sec-bg);     border: 1px solid var(--sec-border);     color: var(--sec-text); }
+.legend-sust { background: var(--sustain-bg);  border: 1px solid var(--sustain-border);  color: var(--sustain-text); }
+.legend-reg  { background: var(--reg-bg);      border: 1px solid var(--reg-border);      color: var(--reg-text); }
+
+/* ── JUMP NAV ── */
+.jumpnav {
+  background: #2a2420;
+  padding: 10px 52px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 2px solid #3a3028;
+}
+.jumpnav a {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #888078;
+  text-decoration: none;
+  padding: 5px 11px;
+  border-radius: 4px;
+  border: 1px solid #3a3028;
+  transition: background 0.14s, color 0.14s;
+  white-space: nowrap;
+}
+.jumpnav a:hover { background: #3a3028; color: #f0ede8; }
+
+/* ── MAIN ── */
+main { padding: 48px 52px; max-width: 1480px; margin: 0 auto; }
+
+/* ── SECTION ── */
+.section { margin-bottom: 64px; }
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+.section-icon { font-size: 22px; line-height: 1; }
+.section-title {
+  font-family: var(--font-serif);
+  font-size: 25px;
+  font-weight: normal;
+  color: var(--ink);
+}
+.section-count {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--text-faint);
+}
+
+.section-desc {
+  color: var(--text-dim);
+  font-size: 13.5px;
+  line-height: 1.68;
+  margin-bottom: 18px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid;
+  max-width: 920px;
+}
+
+/* ── SUSTAIN PANEL ── */
+.sustain-panel {
+  background: var(--sustain-bg);
+  border: 1px solid var(--sustain-border);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 22px;
+  max-width: 920px;
+}
+.sp-title {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--sustain-text);
+  margin-bottom: 10px;
+}
+.sustain-panel ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.sustain-panel li {
+  font-size: 13px;
+  color: #145c30;
+  display: flex;
+  gap: 9px;
+  line-height: 1.55;
+}
+.sustain-panel li::before { content: '→'; color: var(--sustain-border); font-weight: 700; flex-shrink: 0; }
+
+/* ── REG BANNER ── */
+.reg-banner {
+  background: var(--reg-bg);
+  border: 1px solid var(--reg-border);
+  border-radius: 8px;
+  padding: 13px 17px;
+  margin-bottom: 18px;
+  font-size: 13px;
+  color: var(--reg-text);
+  line-height: 1.65;
+  max-width: 920px;
+}
+.reg-banner strong { color: #071e50; }
+
+/* ── CARD GRID ── */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 16px;
+}
+
+/* ── CARD ── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 19px 21px 17px;
+  position: relative;
+  transition: box-shadow 0.17s, transform 0.17s;
+}
+.card:hover {
+  box-shadow: 0 4px 18px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px; height: 100%;
+  border-radius: 10px 0 0 10px;
+  background: var(--stripe, var(--border));
+}
+
+.card.secondary  { background: var(--sec-bg);     border-color: var(--sec-border); }
+.card.spotlight  { background: var(--sustain-bg);  border-color: var(--sustain-border); }
+.card.spotlight::before { background: var(--sustain-border); }
+
+.card-head { display: flex; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+
+.company-name {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  font-weight: bold;
+  color: var(--ink);
+  line-height: 1.2;
+}
+.secondary .company-name { color: #5a3808; }
+.spotlight .company-name { color: #0c4020; }
+
+.company-geo {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  color: var(--text-faint);
+  margin-top: 3px;
+  letter-spacing: 0.04em;
+}
+
+/* tags */
+.tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 9px; }
+.tag {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 3px;
+  line-height: 2;
+}
+.tag-sec  { background: var(--sec-chip);    color: var(--sec-text);     border: 1px solid var(--sec-border); }
+.tag-sust { background: #c0f0d0;            color: var(--sustain-text); border: 1px solid var(--sustain-border); }
+.tag-reg  { background: #d8e8fc;            color: var(--reg-text);     border: 1px solid var(--reg-border); }
+
+/* card internals */
+.lbl {
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-top: 11px;
+  margin-bottom: 3px;
+}
+.secondary .lbl  { color: #b08830; }
+.spotlight .lbl  { color: #1a7040; }
+
+.tech {
+  font-size: 13px;
+  line-height: 1.57;
+  color: var(--text);
+  font-weight: 600;
+}
+.secondary .tech { color: #5a3808; }
+.spotlight .tech { color: #0c4020; }
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 11px 0;
+}
+.secondary .divider { border-color: #e0c888; }
+.spotlight .divider { border-color: #90d8a8; }
+
+.uses {
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--text-dim);
+}
+.secondary .uses { color: #6a4020; }
+.spotlight .uses { color: var(--sustain-text); }
+
+.clients-row { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; margin-top: 10px; }
+.clients-lbl {
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-right: 3px;
+  flex-shrink: 0;
+}
+.secondary .clients-lbl { color: #b08830; }
+.spotlight .clients-lbl { color: #1a7040; }
+
+.chip {
+  font-size: 11.5px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1px 7px;
+  color: var(--text-dim);
+}
+.secondary .chip { background: var(--sec-chip); border-color: #e0c888; color: #6a4020; }
+.spotlight .chip { background: #c8f0d8; border-color: #90d8a8; color: var(--sustain-text); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--ink);
+  color: #787068;
+  padding: 26px 52px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 800px) {
+  header, main, footer, .legend, .jumpnav { padding-left: 18px; padding-right: 18px; }
+  .card-grid { grid-template-columns: 1fr; }
+  header h1 { font-size: 28px; }
+}
+</style>
+</head>
+<body>
+<div style="background:#1e1a16;padding:12px 52px;display:flex;align-items:center;gap:16px;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Arial,sans-serif;font-size:12px;letter-spacing:0.08em;">
+  <a href="../" style="color:#90d4a0;text-decoration:none;text-transform:uppercase;">← Abel Conservation LLC</a>
+</div>
+
+<!-- ════════════════ HEADER ════════════════ -->
+<header>
+  <div class="eyebrow">Commercial Intelligence Map · May 2025</div>
+  <h1>AI/ML <em>Earth Observation</em><br>for Sustainability &amp; Business Intelligence</h1>
+  <p class="header-sub">Companies turning satellite-derived, AI-analyzed earth data into actionable intelligence for enterprise clients — emphasizing use cases that support positive environmental and social outcomes, regulatory compliance, and responsible resource stewardship.</p>
+  <div class="sustain-note">
+    <span>🌿</span>
+    <span><strong>Sustainability framing:</strong> Each section highlights how businesses can use EO directly (operational decisions, environmental monitoring, resource management) or indirectly (CSRD/TCFD/EUDR/TNFD regulatory reporting, ESG disclosure, investor due diligence) to demonstrate and drive real-world environmental and social outcomes.</span>
+  </div>
+</header>
+
+<!-- ════════════════ LEGEND ════════════════ -->
+<div class="legend">
+  <span class="legend-lbl">Card types</span>
+  <div class="legend-item"><div class="l-dot" style="background:#1e1a16;border:1px solid #4a80d0"></div>Core EO/analytics business</div>
+  <div class="legend-item"><span class="legend-pill legend-sec">⚠ Different primary business · EO is key differentiator</span></div>
+  <div class="legend-item"><span class="legend-pill legend-sust">🌿 Primary sustainability mission</span></div>
+  <div class="legend-item"><span class="legend-pill legend-reg">EUDR / CSRD / TCFD / TNFD</span></div>
+</div>
+
+<!-- ════════════════ JUMP NAV ════════════════ -->
+<nav class="jumpnav">
+  <a href="#ag">🌾 Agriculture</a>
+  <a href="#water">💧 Water</a>
+  <a href="#forest">🌳 Forests &amp; Carbon</a>
+  <a href="#deforest">🚫 Deforestation &amp; EUDR</a>
+  <a href="#climate">🌡️ Climate Risk</a>
+  <a href="#insurance">🛡️ Insurance</a>
+  <a href="#energy">⚡ Energy &amp; Grid</a>
+  <a href="#extractives">⛏️ Extractives &amp; O&amp;G</a>
+  <a href="#supply">📦 Supply Chains</a>
+  <a href="#esg">📊 ESG &amp; Finance</a>
+  <a href="#maritime">🚢 Maritime</a>
+  <a href="#urban">🏙️ Urban</a>
+</nav>
+
+<main>
+
+<!-- ════════ 1. AGRICULTURE ════════ -->
+<section class="section" id="ag">
+  <div class="section-header">
+    <span class="section-icon">🌾</span>
+    <h2 class="section-title">Agriculture &amp; Food Supply Chains</h2>
+    <span class="section-count">8 companies</span>
+  </div>
+  <p class="section-desc" style="border-color:var(--cat-ag)">Satellite crop intelligence supports smarter food sourcing, helps corporates measure and reduce Scope 3 agricultural emissions, and enables insurers to scale coverage to small farmers previously excluded from formal finance — creating both commercial and social outcomes.</p>
+
+  <div class="sustain-panel">
+    <div class="sp-title">🌿 Key Sustainability Use Cases</div>
+    <ul>
+      <li>Corporates trace Scope 3 ag emissions to specific sourcing geographies for CSRD/GHGp disclosure — replacing estimation with satellite-verified primary data</li>
+      <li>Regenerative agriculture programs verified via EO-derived soil health and carbon removal metrics, enabling on-pack claims and registry-grade credits</li>
+      <li>Parametric insurance expanded to smallholder farmers in Africa/Asia using satellite rainfall/stress monitoring to trigger automatic payouts</li>
+      <li>Food companies identify supply chain geographies at greatest future climate risk, enabling proactive sourcing diversification</li>
+      <li>Ag lenders assess borrower risk via satellite yield history, unlocking finance for underserved farmers</li>
+    </ul>
+  </div>
+
+  <div class="card-grid">
+
+    <div class="card spotlight" style="--stripe:var(--cat-ag)">
+      <div class="card-head"><div>
+        <div class="company-name">Regrow Ag</div>
+        <div class="company-geo">USA · San Francisco</div>
+      </div></div>
+      <div class="tags"><span class="tag tag-sust">🌿 Scope 3 emissions</span><span class="tag tag-reg">CSRD · SBTi · GHGp</span></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">Remote sensing + ML platform measuring, reporting, and reducing on-farm emissions across food/fiber supply chains; GHGp-compliant with 100% audit registry track record.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Use Cases</div>
+      <div class="uses">Food manufacturers trace Scope 3 to sourcing region; brands run verified regenerative programs; companies meet CSRD/SBTi disclosure with satellite-derived primary data replacing estimation.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">PepsiCo</span><span class="chip">Nestlé</span><span class="chip">Tate &amp; Lyle</span><span class="chip">Bartlett</span></div>
+    </div>
+
+    <div class="card" style="--stripe:var(--cat-ag)">
+      <div class="card-head"><div>
+        <div class="company-name">EarthDaily Analytics</div>
+        <div class="company-geo">Canada · formerly Descartes Labs ag unit</div>
+      </div></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">Daily cloud-free, analysis-ready satellite imagery fused with ML models for global crop monitoring, yield forecasting, and agronomic indexing.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Use Cases</div>
+      <div class="uses">Commodity traders track global food production trends to anticipate shortages; ag insurers validate claims without field visits; lenders unlock credit for underserved farmers using 20+ years of satellite field history.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">Commodity traders</span><span class="chip">Ag insurers</span><span class="chip">Global Clean Energy</span></div>
+    </div>
+
+    <div class="card" style="--stripe:var(--cat-ag)">
+      <div class="card-head"><div>
+        <div class="company-name">SatSure</div>
+        <div class="company-geo">India · Bengaluru</div>
+      </div></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">Multi-satellite EO fused with weather and ground data; ML models generate crop health scores and risk ratings for South/Southeast Asia via API.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Use Cases</div>
+      <div class="uses">Agri-lenders assess field-level crop loan risk, enabling credit to farmers invisible to formal finance; insurers automate claims triage; food companies get supply chain resilience signals ahead of harvest failures.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">HDFC Bank</span><span class="chip">Bajaj Allianz</span><span class="chip">Govt of India programs</span></div>
+    </div>
+
+    <div class="card" style="--stripe:var(--cat-ag)">
+      <div class="card-head"><div>
+        <div class="company-name">Hydrosat</div>
+        <div class="company-geo">USA · Washington DC</div>
+      </div></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">Thermal infrared satellite data + ML estimating crop evapotranspiration, water stress, and yield risk at field scale — weeks before ground-level signals appear.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Use Cases</div>
+      <div class="uses">Traders forecast drought-related yield shortfalls early; insurers underwrite parametric drought products; agribusinesses optimize irrigation to reduce water consumption at scale.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">Agribusiness firms</span><span class="chip">USDA</span><span class="chip">Commodity funds</span></div>
+    </div>
+
+    <div class="card" style="--stripe:var(--cat-ag)">
+      <div class="card-head"><div>
+        <div class="company-name">Pixxel</div>
+        <div class="company-geo">India · Bengaluru</div>
+      </div></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">Hyperspectral satellite constellation (150+ bands) detecting chemical composition, soil health, and crop stress signatures invisible to conventional sensors.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Use Cases</div>
+      <div class="uses">Early detection of nutrient deficiencies reduces fertilizer over-application; soil health monitoring supports regenerative agriculture; ecosystem health mapping for conservation-focused investors and TNFD disclosure.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">Bayer</span><span class="chip">SHV Energy</span><span class="chip">Conservation orgs</span></div>
+    </div>
+
+    <div class="card" style="--stripe:var(--cat-ag)">
+      <div class="card-head"><div>
+        <div class="company-name">ClimateAi</div>
+        <div class="company-geo">USA · San Francisco</div>
+      </div></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">AI-powered long-range (10–30 yr) climate modeling generating seasonal and decadal crop-yield and supply chain risk forecasts trained on satellite, weather station, and reanalysis data.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Use Cases</div>
+      <div class="uses">Food companies stress-test sourcing geographies against future climate; brands identify best-adapted seed varieties; supply chains proactively restructure before disruptions become crises.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">Olam International</span><span class="chip">PepsiCo</span><span class="chip">Ag cooperatives</span></div>
+    </div>
+
+    <div class="card" style="--stripe:var(--cat-ag)">
+      <div class="card-head"><div>
+        <div class="company-name">Agtelligence</div>
+        <div class="company-geo">UK</div>
+      </div></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">FarmScore® — AI + satellite data generating explainable soil health, biodiversity, and carbon indicators per farm; integrates directly into insurer underwriting and claims workflows.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Use Cases</div>
+      <div class="uses">Insurers design ESG-linked parametric products rewarding regenerative farmers; sustainable lenders create biodiversity-linked finance; companies meet climate disclosure requirements for supply chain ag emissions.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">Agricultural insurers</span><span class="chip">ESG lenders</span></div>
+    </div>
+
+    <div class="card secondary" style="--stripe:var(--sec-border)">
+      <div class="card-head"><div>
+        <div class="company-name">Pula</div>
+        <div class="company-geo">Kenya · Nairobi</div>
+      </div></div>
+      <div class="tags"><span class="tag tag-sec">⚠ Primary biz: parametric ag insurance</span><span class="tag tag-sust">🌿 Smallholder impact</span></div>
+      <div class="lbl">EO/AI Role</div>
+      <div class="tech">Satellite imagery + ML cluster farmers by land profiles; rainfall pixels continuously monitored to trigger automatic payouts without loss adjusters.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Impact</div>
+      <div class="uses">Brings formal insurance to &lt;1% insured smallholder farmers across Africa/Asia/LatAm; EO eliminates field verification cost enabling affordable premiums; provides financial safety net preventing distress sales and food insecurity after drought/flood events.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">Seed companies</span><span class="chip">MFIs</span><span class="chip">Govts 18 countries</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════ 2. WATER ════════ -->
+<section class="section" id="water">
+  <div class="section-header">
+    <span class="section-icon">💧</span>
+    <h2 class="section-title">Water: Quality, Scarcity &amp; Infrastructure</h2>
+    <span class="section-count">5 companies</span>
+  </div>
+  <p class="section-desc" style="border-color:var(--cat-water)">Freshwater is among the most material nature-related risks for businesses. EO-based water intelligence supports both operational resilience (utilities reducing waste, companies assessing water-stressed supply chains) and regulatory compliance (TNFD water dependency disclosure, CSRD environmental impact reporting).</p>
+
+  <div class="sustain-panel">
+    <div class="sp-title">🌿 Key Sustainability Use Cases</div>
+    <ul>
+      <li>Water utilities detect and repair underground pipe leaks using SAR satellite data — preventing billions of liters of treated potable water from being lost</li>
+      <li>Corporations disclose water dependency and watershed risk as part of TNFD/CSRD nature reporting using satellite-derived basin stress maps</li>
+      <li>Companies with water-intensive operations (food, beverages, textiles, mining) assess supply chain exposure to water-stressed geographies</li>
+      <li>Municipal reservoir managers detect harmful algal blooms early via satellite water quality monitoring, protecting public health</li>
+      <li>Investors screen portfolio companies for water-related stranded asset risk in water-constrained regions</li>
+    </ul>
+  </div>
+
+  <div class="card-grid">
+
+    <div class="card spotlight" style="--stripe:var(--cat-water)">
+      <div class="card-head"><div>
+        <div class="company-name">ASTERRA (formerly Utilis)</div>
+        <div class="company-geo">Israel / USA · 31+ countries</div>
+      </div></div>
+      <div class="tags"><span class="tag tag-sust">🌿 Water loss prevention</span></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">L-Band SAR satellite data penetrating up to 3m below ground; patented algorithms detect spectral signature of treated potable water to pinpoint underground pipe leaks — technology originally developed to find water on Mars/Venus.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Impact</div>
+      <div class="uses">Water utilities repair leaks 5–12x faster than traditional acoustic methods. The World Bank estimates 32 billion m³ of treated water is lost to leaks annually. Also detects sewage leaks threatening groundwater contamination, and monitors soil moisture risk near dams, levees, and mine tailings. California Energy Commission study confirms it finds 6x more leaks than fixed acoustic systems.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">Scottish Water</span><span class="chip">Portsmouth Water</span><span class="chip">Maynilad Philippines</span><span class="chip">120+ utilities globally</span></div>
+    </div>
+
+    <div class="card spotlight" style="--stripe:var(--cat-water)">
+      <div class="card-head"><div>
+        <div class="company-name">EOMAP (acquired by Fugro 2025)</div>
+        <div class="company-geo">Germany · Gilching</div>
+      </div></div>
+      <div class="tags"><span class="tag tag-sust">🌿 Water quality monitoring</span><span class="tag tag-reg">TNFD · CSRD</span></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">Multispectral satellite data processed with physics-based algorithms to measure water quality parameters (turbidity, chlorophyll, cyanobacteria, suspended matter) across reservoirs, lakes, rivers, and coastal waters simultaneously.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Impact</div>
+      <div class="uses">Drinking water providers detect harmful algal blooms before they reach treatment plants; regulators monitor industrial discharge compliance; water-intensive industries assess water quality at sourcing locations; municipalities manage drought-stressed reservoirs with continuous satellite monitoring replacing infrequent field samples.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">Water utilities</span><span class="chip">Regulators</span><span class="chip">Environmental agencies</span></div>
+    </div>
+
+    <div class="card" style="--stripe:var(--cat-water)">
+      <div class="card-head"><div>
+        <div class="company-name">HydroSAT</div>
+        <div class="company-geo">USA · Washington DC / Luxembourg</div>
+      </div></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">Thermal infrared satellite constellation measuring evapotranspiration and water stress at field/basin scale; acquired IrriWatch (irrigation analytics SaaS) to deliver daily crop-water recommendations in 62 countries.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Impact</div>
+      <div class="uses">Irrigators reduce water consumption through data-driven scheduling; water-stressed basins monitored for corporate TNFD water dependency disclosure; food companies assess supply chain exposure to water-scarce geographies; utilities plan infrastructure investment based on basin stress forecasts.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">NRO (data contract)</span><span class="chip">Agribusinesses 62 countries</span></div>
+    </div>
+
+    <div class="card" style="--stripe:var(--cat-water)">
+      <div class="card-head"><div>
+        <div class="company-name">Rezatec</div>
+        <div class="company-geo">UK · Oxford</div>
+      </div></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">Multi-source EO (SAR, optical, LiDAR) fused with AI to detect ground movement, vegetation change, and infrastructure deterioration risk in water utility networks, reservoirs, and pipe catchments.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Impact</div>
+      <div class="uses">Water utilities detect pipe burst risk from soil movement, preventing catastrophic failures; embankment deformation monitoring around reservoirs reduces dam safety risk; satellite-derived catchment health maps inform watershed protection programs; utilities reduce emergency repair costs, freeing capital for network renewal.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">Anglian Water</span><span class="chip">Scottish Water</span><span class="chip">Network Rail</span></div>
+    </div>
+
+    <div class="card" style="--stripe:var(--cat-water)">
+      <div class="card-head"><div>
+        <div class="company-name">Floodbase</div>
+        <div class="company-geo">USA · New York</div>
+      </div></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">SAR satellite + hydrological ML models generating near-real-time global flood extent mapping and historical flood depth datasets — all-weather, global coverage.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Impact</div>
+      <div class="uses">Parametric flood insurance triggers fast, fair payouts in developing-country communities previously excluded from coverage; humanitarian orgs pre-position aid before flood peaks; development banks design climate-resilient infrastructure; supply chain teams assess flood risk at supplier locations for CSRD physical risk disclosure.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">Reinsurers</span><span class="chip">Development banks</span><span class="chip">Humanitarian orgs</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════ 3. FORESTS & CARBON ════════ -->
+<section class="section" id="forest">
+  <div class="section-header">
+    <span class="section-icon">🌳</span>
+    <h2 class="section-title">Forests, Biodiversity &amp; Carbon MRV</h2>
+    <span class="section-count">5 companies</span>
+  </div>
+  <p class="section-desc" style="border-color:var(--cat-forest)">Satellite-based forest monitoring and carbon measurement (MRV) is foundational to both voluntary carbon markets and mandatory nature reporting. EO replaces costly, infrequent manual field inventories with continuous, auditable remote monitoring.</p>
+
+  <div class="sustain-panel">
+    <div class="sp-title">🌿 Key Sustainability Use Cases</div>
+    <ul>
+      <li>Digital MRV (dMRV): corporate buyers verify integrity of nature-based carbon credits — satellite data replaces trust-based claims with verifiable remote sensing evidence</li>
+      <li>Carbon project developers reduce issuance cost by replacing expensive manual field inventories ($100k+) with satellite-based biomass estimation</li>
+      <li>Companies disclose deforestation-linked Scope 3 emissions and nature dependencies as required by CSRD and TNFD frameworks</li>
+      <li>Financial institutions screen investment portfolios for deforestation risk exposure</li>
+      <li>Land managers establish biodiversity baselines for Biodiversity Net Gain (BNG) compliance and Nature Credits markets</li>
+    </ul>
+  </div>
+
+  <div class="card-grid">
+
+    <div class="card spotlight" style="--stripe:var(--cat-forest)">
+      <div class="card-head"><div>
+        <div class="company-name">Pachama / Carbon Direct</div>
+        <div class="company-geo">USA · San Francisco · acquired by Carbon Direct 2025</div>
+      </div></div>
+      <div class="tags"><span class="tag tag-sust">🌿 Forest carbon dMRV</span><span class="tag tag-reg">Verra · ACR · CAR</span></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">Satellite + LiDAR + ML platform for digital MRV of forest carbon — estimating tree density, biomass, and deforestation risk; piloting registry-integrated dMRV with Verra to issue credits without manual field measurement.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Impact</div>
+      <div class="uses">Corporate buyers verify quality of nature-based credits before purchase; less than 30% of registry-approved projects pass Pachama's EO-based screening; dMRV dramatically reduces cost and time to issue high-quality forest carbon credits, enabling more projects globally.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">Salesforce</span><span class="chip">Microsoft</span><span class="chip">Airbnb</span><span class="chip">Netflix</span><span class="chip">Shopify</span></div>
+    </div>
+
+    <div class="card spotlight" style="--stripe:var(--cat-forest)">
+      <div class="card-head"><div>
+        <div class="company-name">Space Intelligence</div>
+        <div class="company-geo">UK · Edinburgh</div>
+      </div></div>
+      <div class="tags"><span class="tag tag-sust">🌿 Forest &amp; biodiversity mapping</span><span class="tag tag-reg">TNFD · BNG</span></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">ML applied to multi-source EO to produce precise maps of forest type, condition, aboveground carbon, and habitat quality — used for nature finance baselines and conservation planning.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Impact</div>
+      <div class="uses">Land managers establish EO-verified baselines for UK Biodiversity Net Gain compliance; developers identify optimal reforestation sites; nature finance investors assess project quality; companies verify deforestation-free supply chains with independent satellite evidence.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">UK Forestry Commission</span><span class="chip">Nature finance investors</span><span class="chip">Carbon project devs</span></div>
+    </div>
+
+    <div class="card" style="--stripe:var(--cat-forest)">
+      <div class="card-head"><div>
+        <div class="company-name">Nadar</div>
+        <div class="company-geo">Netherlands</div>
+      </div></div>
+      <div class="tags"><span class="tag tag-reg">EUDR · Carbon registries</span></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">AI/ML on optical + radar satellite data monitoring deforestation and carbon stocks at 10m resolution globally — cloud-independent via SAR fusion, updating monthly with near-real-time alerts.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Impact</div>
+      <div class="uses">EUDR compliance for forest-risk commodity imports; affordable satellite-based carbon MRV for project developers; corporations track deforestation in supply chain sourcing regions; land owners measure and verify carbon stock changes for nature credit monetization.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">EUDR operators</span><span class="chip">Carbon project devs</span><span class="chip">Land owners</span></div>
+    </div>
+
+    <div class="card secondary" style="--stripe:var(--sec-border)">
+      <div class="card-head"><div>
+        <div class="company-name">South Pole</div>
+        <div class="company-geo">Switzerland · Zurich</div>
+      </div></div>
+      <div class="tags"><span class="tag tag-sec">⚠ Primary biz: carbon advisory &amp; project development</span></div>
+      <div class="lbl">EO/AI Role</div>
+      <div class="tech">Satellite forest cover monitoring + ML deforestation detection to validate REDD+ project baselines, demonstrate additionality, and monitor permanence of carbon projects over time.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Impact</div>
+      <div class="uses">Corporate clients purchase satellite-verified, high-integrity carbon credits; financial institutions assess nature-related risks using EO-based land-use data; EO monitoring prevents fraudulent "phantom" carbon projects from reaching corporate buyers.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">Fortune 500 companies</span><span class="chip">Financial institutions</span></div>
+    </div>
+
+    <div class="card" style="--stripe:var(--cat-forest)">
+      <div class="card-head"><div>
+        <div class="company-name">OroraTech</div>
+        <div class="company-geo">Germany · Munich</div>
+      </div></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">Thermal IR satellite constellation for real-time, global wildfire detection and heat-anomaly mapping; AI fire behavior prediction models updating continuously throughout an event.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Impact</div>
+      <div class="uses">Forest agencies detect fires minutes after ignition, enabling faster suppression and reducing total burned area; timber companies protect managed forest assets; utilities identify wildfire threat to grid infrastructure proactively rather than reactively.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">BMW</span><span class="chip">European fire agencies</span><span class="chip">Utilities</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════ 4. DEFORESTATION & EUDR ════════ -->
+<section class="section" id="deforest">
+  <div class="section-header">
+    <span class="section-icon">🚫</span>
+    <h2 class="section-title">Deforestation-Free Supply Chains &amp; EUDR Compliance</h2>
+    <span class="section-count">3 companies</span>
+  </div>
+  <div class="reg-banner">
+    <strong>Regulatory context:</strong> The EU Deforestation Regulation (EUDR) requires companies importing cattle, cocoa, coffee, palm oil, rubber, soy, and wood to prove supply chains are deforestation-free from Dec 31 2020. Implementation: Dec 30 2025 (large companies), June 2026 (SMEs). Satellite monitoring is the only viable scalable compliance mechanism.
+  </div>
+  <p class="section-desc" style="border-color:#d4760a">These companies are dedicated to proving deforestation-free commodity sourcing using satellite monitoring — directly mandated by EUDR and voluntarily adopted by companies with zero-deforestation commitments. EO is the only scalable substitute for continuous on-ground auditing across thousands of supplier plots.</p>
+  <div class="card-grid">
+
+    <div class="card spotlight" style="--stripe:var(--sustain-border)">
+      <div class="card-head"><div>
+        <div class="company-name">Satelligence</div>
+        <div class="company-geo">Netherlands</div>
+      </div></div>
+      <div class="tags"><span class="tag tag-sust">🌿 EUDR market leader</span><span class="tag tag-reg">EUDR · Science-backed</span></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">Multi-temporal satellite data (optical + SAR, cloud-independent) at 10m resolution; EY-certified, audit-ready methodology developed with European Forest Institute and World Cocoa Foundation; differentiates permanent deforestation from temporary canopy changes.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Impact</div>
+      <div class="uses">Food companies demonstrate deforestation-free sourcing with verifiable satellite evidence; Fairtrade International uses Satelligence for ongoing forest monitoring across certified supply chains; EU Competent Authorities use the data for EUDR enforcement; high-risk regions (Gran Chaco soy, tropical palm) managed with real-time alerts rather than annual audits.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">Neste</span><span class="chip">Bunge</span><span class="chip">Fairtrade International</span><span class="chip">EU Competent Authorities</span></div>
+    </div>
+
+    <div class="card" style="--stripe:var(--sustain-border)">
+      <div class="card-head"><div>
+        <div class="company-name">Global Forest Watch Pro (WRI)</div>
+        <div class="company-geo">USA · Washington DC (World Resources Institute)</div>
+      </div></div>
+      <div class="tags"><span class="tag tag-reg">EUDR · Voluntary commitments</span></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">Open-data platform combining Hansen/UMD satellite tree cover loss data with supply chain mapping tools; GFW Pro translates geospatial data into compliance workflows for EUDR due diligence statements and voluntary corporate deforestation commitments.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Impact</div>
+      <div class="uses">Companies produce deforestation risk assessments for any supply chain location; financial institutions screen investment portfolios for deforestation exposure; governments monitor commodity-linked deforestation at national scale; open-data foundation democratizes access to forest monitoring for NGOs and developing-country governments.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">Consumer goods companies</span><span class="chip">Financial institutions</span><span class="chip">Govts</span></div>
+    </div>
+
+    <div class="card" style="--stripe:var(--sustain-border)">
+      <div class="card-head"><div>
+        <div class="company-name">Nadar</div>
+        <div class="company-geo">Netherlands</div>
+      </div></div>
+      <div class="tags"><span class="tag tag-reg">EUDR · Carbon registries</span></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">End-to-end EUDR due diligence platform: supplier data collection → satellite deforestation risk assessment → due diligence statement submission — all in one workflow, 10m resolution updated monthly.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Impact</div>
+      <div class="uses">Streamlines EUDR compliance for importers of coffee, cocoa, palm, soy, and wood; SAR fusion eliminates cloud-cover blind spots in tropical monitoring; same satellite data powering both regulatory compliance and voluntary carbon markets simultaneously.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">EUDR operators</span><span class="chip">Commodity traders</span><span class="chip">Retailers</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════ 5. CLIMATE RISK ════════ -->
+<section class="section" id="climate">
+  <div class="section-header">
+    <span class="section-icon">🌡️</span>
+    <h2 class="section-title">Climate &amp; Physical Risk Analytics</h2>
+    <span class="section-count">5 companies</span>
+  </div>
+  <p class="section-desc" style="border-color:var(--cat-climate)">Physical climate risk analytics — grounded in satellite-derived historical and projected data — are now required for regulatory disclosure (TCFD, CSRD ESRS E1, ISSB S2) and increasingly embedded in financial decision-making. Better risk quantification drives capital toward adaptation and away from stranded assets.</p>
+  <div class="card-grid">
+
+    <div class="card" style="--stripe:var(--cat-climate)">
+      <div class="card-head"><div>
+        <div class="company-name">Jupiter Intelligence</div>
+        <div class="company-geo">USA · San Mateo, CA</div>
+      </div></div>
+      <div class="tags"><span class="tag tag-reg">TCFD · CSRD · ISSB S2</span></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">ClimateScore Global: petabytes of satellite, sensor, and climate model data → AI delivers hyper-local (90m) risk scores for 9 hazards at 22.3 billion locations, 1 hour to 50 years ahead. Links satellite-derived hazard data directly to financial loss estimates and adaptation ROI modeling.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Use Cases</div>
+      <div class="uses">Banks integrate climate risk into loan pricing models, directing capital away from chronically exposed assets; insurers re-price policies to reflect true risk creating adaptation incentives; infrastructure investors plan adaptation with satellite-backed ROI modeling; companies meet CSRD ESRS E1 physical risk disclosure with asset-level evidence.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">MS&amp;AD Insurance</span><span class="chip">Arcadis</span><span class="chip">Banks &amp; real estate</span></div>
+    </div>
+
+    <div class="card" style="--stripe:var(--cat-climate)">
+      <div class="card-head"><div>
+        <div class="company-name">Sust Global</div>
+        <div class="company-geo">USA · San Francisco</div>
+      </div></div>
+      <div class="tags"><span class="tag tag-reg">TCFD · CSRD · TNFD</span></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">"Spatial finance" platform combining satellite-derived land-surface data with climate projections to score physical asset exposure — heat, flood, drought, wildfire — at portfolio scale.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Use Cases</div>
+      <div class="uses">Asset managers integrate climate and nature risk into investment screens; PE firms conduct EO-backed climate due diligence; banks fulfill TCFD/CSRD disclosure with asset-level EO data; connects EO-derived environmental data directly to financial valuation — foundation for pricing nature into capital markets.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">Asset managers</span><span class="chip">PE firms</span><span class="chip">Banks</span></div>
+    </div>
+
+    <div class="card" style="--stripe:var(--cat-climate)">
+      <div class="card-head"><div>
+        <div class="company-name">EarthScan (Mitiga Solutions)</div>
+        <div class="company-geo">Spain · Barcelona</div>
+      </div></div>
+      <div class="tags"><span class="tag tag-reg">CSRD · TCFD · EU Taxonomy</span></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">CMIP6-based climate hazard modeling with Bayesian ML; A–F asset-level risk grades across 7 hazards for 500M+ pre-mapped global assets; downloadable CSRD/TCFD-aligned reports.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Use Cases</div>
+      <div class="uses">Infrastructure investors embed climate risk into pre-transaction due diligence; retail and manufacturing companies assess supply chain node resilience; ESG consultants package regulatory-ready risk reports; asset managers meet EU Taxonomy environmental assessment requirements.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">Arjun Infrastructure Partners</span><span class="chip">ESG consultancies</span><span class="chip">Insurance groups</span></div>
+    </div>
+
+    <div class="card" style="--stripe:var(--cat-climate)">
+      <div class="card-head"><div>
+        <div class="company-name">Tomorrow.io</div>
+        <div class="company-geo">USA · Boston</div>
+      </div></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">Proprietary microwave-sensing satellite constellation + ML weather modeling — hyper-local nowcasting to seasonal climate risk forecasts used for operational and strategic decisions.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Use Cases</div>
+      <div class="uses">Airlines and logistics companies reduce fuel waste and delays from weather-driven rerouting; construction firms reduce carbon from idle equipment; utilities manage renewable energy grid stability around weather variability; companies document weather-related operational disruptions for climate risk disclosure.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">Delta Air Lines</span><span class="chip">NFL</span><span class="chip">Uber</span><span class="chip">National Grid</span></div>
+    </div>
+
+    <div class="card" style="--stripe:var(--cat-climate)">
+      <div class="card-head"><div>
+        <div class="company-name">Fathom</div>
+        <div class="company-geo">UK · Bristol</div>
+      </div></div>
+      <div class="tags"><span class="tag tag-reg">TCFD · Catastrophe modeling</span></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">Global hydrological models combining satellite elevation, river network, and climate data to produce probabilistic flood maps at 30m resolution for present and future climate scenarios.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Use Cases</div>
+      <div class="uses">Reinsurers improve catastrophe model accuracy enabling fairer premium pricing; mortgage lenders screen properties for flood risk; infrastructure developers site new assets away from future floodplains; city planners design flood resilience programs prioritizing most vulnerable communities.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">Swiss Re</span><span class="chip">World Bank</span><span class="chip">UK Environment Agency</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════ 6. INSURANCE ════════ -->
+<section class="section" id="insurance">
+  <div class="section-header">
+    <span class="section-icon">🛡️</span>
+    <h2 class="section-title">Insurance &amp; Reinsurance</h2>
+    <span class="section-count">4 companies</span>
+  </div>
+  <p class="section-desc" style="border-color:var(--cat-insurance)">EO enables faster, fairer, and more accurate insurance — from accelerating post-disaster claims payments to building satellite-based parametric products that expand coverage to previously excluded populations and geographies.</p>
+  <div class="card-grid">
+
+    <div class="card" style="--stripe:var(--cat-insurance)">
+      <div class="card-head"><div><div class="company-name">ICEYE</div><div class="company-geo">Finland · Espoo</div></div></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">SAR satellite constellation — all-weather, day-and-night — providing near real-time global flood, wildfire, and storm damage mapping at meter-level resolution within hours of an event.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Use Cases</div>
+      <div class="uses">Insurers accelerate post-disaster claims from weeks to days, reducing financial distress for affected communities; reinsurers improve catastrophe model accuracy; emergency managers prioritize search-and-rescue by satellite-confirmed impact zone; CSRD physical risk disclosures validated by satellite-confirmed event data.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">Tokio Marine</span><span class="chip">Swiss Re</span><span class="chip">FEMA</span></div>
+    </div>
+
+    <div class="card" style="--stripe:var(--cat-insurance)">
+      <div class="card-head"><div><div class="company-name">Cape Analytics</div><div class="company-geo">USA · Redwood City, CA</div></div></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">Deep learning applied to aerial and satellite imagery to extract property-level attributes — roof condition, vegetation proximity, HVAC, outbuildings — for P&C underwriting without physical inspections.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Use Cases</div>
+      <div class="uses">P&amp;C insurers accurately price wildfire risk, creating economic incentives for homeowners to harden homes; fair premium differentiation rewards resilient property owners; eliminates unnecessary inspection trips; mortgage lenders assess collateral quality without in-person visits.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">State Farm</span><span class="chip">CSAA</span><span class="chip">Nationwide</span><span class="chip">AIG</span></div>
+    </div>
+
+    <div class="card" style="--stripe:var(--cat-insurance)">
+      <div class="card-head"><div><div class="company-name">RS Metrics</div><div class="company-geo">USA</div></div></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">ML analysis of satellite/aerial imagery quantifying physical asset conditions — commercial roof state, HVAC systems, solar panel degradation, parking lot condition — at portfolio scale.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Use Cases</div>
+      <div class="uses">Property insurers detect undisclosed damage before binding coverage; REITs remotely assess capex needs across large portfolios; banks evaluate collateral quality for commercial real estate loans; solar asset owners monitor panel degradation for maintenance prioritization.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">P&amp;C insurers</span><span class="chip">REITs</span><span class="chip">Commercial banks</span></div>
+    </div>
+
+    <div class="card" style="--stripe:var(--cat-insurance)">
+      <div class="card-head"><div><div class="company-name">Agtelligence</div><div class="company-geo">UK</div></div></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">FarmScore® — explainable AI + satellite scores for soil health, biodiversity, and carbon per farm; integrates directly into insurer underwriting and claims workflows.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Use Cases</div>
+      <div class="uses">Insurers design ESG-linked parametric products rewarding regenerative farming; sustainable finance teams create biodiversity-linked insurance aligned with TNFD; farmers build verified sustainability track records enabling access to better-priced coverage.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">Agricultural insurers</span><span class="chip">ESG lenders</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════ 7. ENERGY & GRID ════════ -->
+<section class="section" id="energy">
+  <div class="section-header">
+    <span class="section-icon">⚡</span>
+    <h2 class="section-title">Energy, Utilities &amp; Grid Infrastructure</h2>
+    <span class="section-count">4 companies</span>
+  </div>
+  <p class="section-desc" style="border-color:var(--cat-energy)">EO supports the energy transition by enabling grid resilience (reducing wildfire-ignited outages), independent emissions verification (holding oil &amp; gas operators accountable), and monitoring renewable energy build-out progress.</p>
+  <div class="card-grid">
+
+    <div class="card spotlight" style="--stripe:var(--cat-energy)">
+      <div class="card-head"><div><div class="company-name">Overstory</div><div class="company-geo">Netherlands · Amsterdam</div></div></div>
+      <div class="tags"><span class="tag tag-sust">🌿 Wildfire prevention</span></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">ML applied to multi-temporal satellite imagery to map and predict vegetation growth risk along power corridors; continuous monitoring with outage-risk scoring by tree species, height, and proximity.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Impact</div>
+      <div class="uses">Electric utilities direct trimming crews to highest-risk locations, preventing vegetation-ignited wildfires; reduces SAIDI/SAIFI outage metrics improving grid reliability for communities; resource-efficient vegetation management reduces O&amp;M cost and carbon from unnecessary contractor trips.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">PG&amp;E</span><span class="chip">National Grid</span><span class="chip">US/EU utilities</span></div>
+    </div>
+
+    <div class="card spotlight" style="--stripe:var(--cat-energy)">
+      <div class="card-head"><div><div class="company-name">GHGSat</div><div class="company-geo">Canada · Montreal</div></div></div>
+      <div class="tags"><span class="tag tag-sust">🌿 Methane accountability</span><span class="tag tag-reg">CSRD · EU Methane Regulation</span></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">Proprietary satellite constellation with high-resolution spectrometers detecting methane (CH₄) and CO₂ down to individual industrial facility level — first commercial system capable of pinpointing emission sources within a site boundary.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Impact</div>
+      <div class="uses">Oil &amp; gas companies detect and quantify fugitive methane leaks for rapid repair — methane is 80x more potent than CO₂ over 20 years; independent satellite data holds operators accountable beyond self-reporting; coal operators monitor methane for safety and climate compliance; regulators verify industrial emissions claims with independent space-based evidence.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">TotalEnergies</span><span class="chip">bp</span><span class="chip">Coal operators</span><span class="chip">Regulators</span></div>
+    </div>
+
+    <div class="card" style="--stripe:var(--cat-energy)">
+      <div class="card-head"><div><div class="company-name">Kayrros</div><div class="company-geo">France · Paris</div></div></div>
+      <div class="tags"><span class="tag tag-reg">Paris Agreement monitoring</span></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">Satellite analytics measuring methane emissions, oil/gas asset activity, and energy transition indicators (solar/wind buildout, coal plant activity) via ML on optical and SAR imagery at global scale.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Use Cases</div>
+      <div class="uses">IEA and regulators measure real-world methane emissions vs. pledges; policymakers benchmark energy transition progress vs. national commitments; energy companies compare their emissions footprint vs. peers with independent satellite data — creating accountability for climate commitments.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">IEA</span><span class="chip">Energy majors</span><span class="chip">Commodity banks</span></div>
+    </div>
+
+    <div class="card" style="--stripe:var(--cat-energy)">
+      <div class="card-head"><div><div class="company-name">Ursa Space</div><div class="company-geo">USA · Ithaca, NY</div></div></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">SAR satellite analysis delivering weekly global oil inventory estimates by measuring floating-roof tank shadow displacement — independent of cloud cover or darkness.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Use Cases</div>
+      <div class="uses">Independent verification of oil production and inventory data reduces information asymmetry in energy markets; regulators track storage levels to detect sanctioned oil flows; analysts benchmark official government reports against satellite-verified reality — supporting accountability in fossil fuel markets.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">Energy traders</span><span class="chip">Hedge funds</span><span class="chip">Energy analysts</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════ 8. EXTRACTIVES & O&G ════════ -->
+<section class="section" id="extractives">
+  <div class="section-header">
+    <span class="section-icon">⛏️</span>
+    <h2 class="section-title">Extractives, Mining &amp; Oil &amp; Gas — Environmental Accountability</h2>
+    <span class="section-count">5 companies</span>
+  </div>
+  <p class="section-desc" style="border-color:var(--cat-extractives)">Satellite monitoring holds the extractives sector accountable to environmental commitments — detecting tailings dam failures before they become disasters, verifying rehabilitation of mine sites, monitoring illegal mining, and independently tracking GHG emissions against reported figures. The use cases below emphasize environmental compliance and damage limitation, not extraction optimization.</p>
+
+  <div class="sustain-panel">
+    <div class="sp-title">🌿 Key Sustainability Use Cases in Extractives</div>
+    <ul>
+      <li>Tailings dam monitoring: SAR satellite detects ground settlement and deformation around mining tailings ponds, providing early warning before dam failures (post-Brumadinho/Mariana era)</li>
+      <li>Illegal mining detection: satellite change-detection identifies unauthorized artisanal mining encroachments in protected areas, enabling enforcement</li>
+      <li>Mine site rehabilitation verification: satellite land cover monitoring tracks whether companies fulfill obligations to restore land to its pre-mining ecological state</li>
+      <li>Water contamination risk: EO detects changes in land cover and drainage patterns near mine sites, providing early warning of acid mine drainage or slurry spills into waterways</li>
+      <li>Independent Scope 1 emissions verification: satellite methane and CO₂ measurements give regulators and investors an independent check on operator self-reported emissions</li>
+    </ul>
+  </div>
+
+  <div class="card-grid">
+
+    <div class="card spotlight" style="--stripe:var(--cat-extractives)">
+      <div class="card-head"><div><div class="company-name">GHGSat</div><div class="company-geo">Canada · Montreal</div></div></div>
+      <div class="tags"><span class="tag tag-sust">🌿 Emissions accountability</span><span class="tag tag-reg">CSRD · EU Methane Regulation</span></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">High-resolution satellite spectrometers detecting methane and CO₂ at individual facility level — attribution of emissions to specific well pads, compressor stations, coal seam vents, or landfills.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Impact</div>
+      <div class="uses">Independent verification of oil/gas operator methane self-reports for regulators (EU Methane Regulation); fast detection and repair of unintentional leaks; coal mine methane monitoring for occupational safety and climate compliance; investors use satellite emissions data to identify operators with poor methane management for ESG screens and engagement.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">Oil majors</span><span class="chip">Coal operators</span><span class="chip">Environmental regulators</span></div>
+    </div>
+
+    <div class="card spotlight" style="--stripe:var(--cat-extractives)">
+      <div class="card-head"><div><div class="company-name">ASTERRA (Utilis)</div><div class="company-geo">Israel / USA</div></div></div>
+      <div class="tags"><span class="tag tag-sust">🌿 Tailings dam safety</span></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">L-Band SAR satellite data penetrating the ground surface; EarthWorks product monitors soil moisture and deformation near dams, levees, mine tailings ponds, and embankments.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Impact</div>
+      <div class="uses">Mining companies continuously monitor tailings dam stability to prevent catastrophic failures — 67% of ICMM member facilities now tracking Global Industry Standard on Tailings Management (GISTM); early warning enables evacuation and intervention before communities downstream are affected; landslide risk monitoring near mine sites reduces worker safety incidents.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">Mining companies</span><span class="chip">Environmental regulators</span><span class="chip">Infrastructure owners</span></div>
+    </div>
+
+    <div class="card" style="--stripe:var(--cat-extractives)">
+      <div class="card-head"><div><div class="company-name">Satellogic</div><div class="company-geo">Uruguay / USA</div></div></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">Sub-meter multispectral satellite constellation; frequent revisit of extractive sites with ML change-detection for operational monitoring, land cover change, and encroachment detection.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Use Cases</div>
+      <div class="uses">Mining companies monitor site rehabilitation progress vs. regulatory commitments; energy companies verify pipeline right-of-way is free from encroachment and environmental damage; investors track land disturbance footprint for ESG screening; governments detect illegal mining in protected areas and indigenous territories.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">YPF</span><span class="chip">Energy majors</span><span class="chip">Govts</span></div>
+    </div>
+
+    <div class="card" style="--stripe:var(--cat-extractives)">
+      <div class="card-head"><div><div class="company-name">Kayrros</div><div class="company-geo">France · Paris</div></div></div>
+      <div class="tags"><span class="tag tag-reg">Paris Agreement · CSRD</span></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">Satellite-based analytics measuring methane, CO₂, and energy production activity across oil &amp; gas fields, coal mines, and industrial facilities at global scale.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Use Cases</div>
+      <div class="uses">Policymakers and the IEA independently measure oil &amp; gas sector methane emissions vs. operator pledges; ESG investors screen for operators with highest emissions intensity; banks conduct due diligence on energy assets' regulatory compliance risk; climate researchers access independent emissions evidence.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">IEA</span><span class="chip">Energy majors</span><span class="chip">Commodity banks</span></div>
+    </div>
+
+    <div class="card" style="--stripe:var(--cat-extractives)">
+      <div class="card-head"><div><div class="company-name">Rezatec</div><div class="company-geo">UK · Oxford</div></div></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">Multi-source EO fused with AI for ground movement, slope stability, and infrastructure deterioration — applied to pipelines, embankments, and industrial infrastructure in remote environments.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Use Cases</div>
+      <div class="uses">Pipeline operators detect terrain movement threatening pipeline integrity, preventing spills before they reach waterways; mining companies monitor slope stability around open-pit mines; proactive intervention reduces remediation cost and ecological damage vs. reactive spill cleanup.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">Anglian Water</span><span class="chip">Scottish Water</span><span class="chip">Network Rail</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════ 9. SUPPLY CHAINS ════════ -->
+<section class="section" id="supply">
+  <div class="section-header">
+    <span class="section-icon">📦</span>
+    <h2 class="section-title">Supply Chain Transparency &amp; Commodity Intelligence</h2>
+    <span class="section-count">4 companies</span>
+  </div>
+  <p class="section-desc" style="border-color:var(--cat-supply)">EO-based supply chain intelligence enables corporates to verify supplier environmental claims, detect violations in upstream supply chains, and proactively identify climate-related disruptions before they cascade into product shortages or reputational damage.</p>
+  <div class="card-grid">
+
+    <div class="card" style="--stripe:var(--cat-supply)">
+      <div class="card-head"><div><div class="company-name">Satelligence</div><div class="company-geo">Netherlands</div></div></div>
+      <div class="tags"><span class="tag tag-reg">EUDR · Zero deforestation</span></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">Continuous satellite deforestation monitoring across supply chain sourcing geographies; audit-ready risk assessments for EUDR due diligence statements; real-time alerts on deforestation events linked to specific supplier plots.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Use Cases</div>
+      <div class="uses">Consumer goods companies verify zero-deforestation commitments across soy, palm, cocoa, coffee, and rubber supply chains; procurement teams receive real-time alerts on deforestation in sourcing regions; financial institutions screen supply chain financing portfolios for EUDR exposure.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">Neste</span><span class="chip">Bunge</span><span class="chip">Fairtrade International</span></div>
+    </div>
+
+    <div class="card" style="--stripe:var(--cat-supply)">
+      <div class="card-head"><div><div class="company-name">Xoople</div><div class="company-geo">USA</div></div></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">Earth data infrastructure layer converting satellite pixels into structured, enterprise-grade measurements — tracking surface change, vegetation health, and environmental risk via API or agent-ready format.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Use Cases</div>
+      <div class="uses">Supply chain managers monitor upstream crop and raw material health at supplier locations; construction project owners track site progress vs. contractor claims remotely; infrastructure teams monitor slope stability and ice transitions; lenders assess environmental conditions at collateral locations for green lending decisions.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">Alaska DoT</span><span class="chip">Global engineering firms</span></div>
+    </div>
+
+    <div class="card" style="--stripe:var(--cat-supply)">
+      <div class="card-head"><div><div class="company-name">Planet Labs</div><div class="company-geo">USA · San Francisco</div></div></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">Largest commercial constellation capturing 30TB/day; AI Area Monitoring Service (AMS) applies ML to automate field-scale monitoring for agriculture, deforestation, and commodity supply chains globally.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Use Cases</div>
+      <div class="uses">Agriculture insurers automate claims triage; food companies verify deforestation-free sourcing at supplier field level; forestry firms track illegal logging in managed concessions; NGOs monitor protected area encroachment; commodity traders access independent production estimates ahead of official reports.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">Swiss Re</span><span class="chip">Accenture</span><span class="chip">800+ enterprise clients</span></div>
+    </div>
+
+    <div class="card" style="--stripe:var(--cat-supply)">
+      <div class="card-head"><div><div class="company-name">QuantCube Technology</div><div class="company-geo">France · Paris</div></div></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">Real-time macroeconomic intelligence fusing satellite imagery with alternative data via ML to generate nowcast economic indicators ahead of official releases.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Use Cases</div>
+      <div class="uses">Central banks track economic recovery from climate events in near real-time; commodity firms monitor supply disruptions from extreme weather; multilateral development banks assess food security situations using satellite harvest tracking before famine alerts are issued.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">ECB</span><span class="chip">Asset managers</span><span class="chip">Commodity firms</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════ 10. ESG & FINANCE ════════ -->
+<section class="section" id="esg">
+  <div class="section-header">
+    <span class="section-icon">📊</span>
+    <h2 class="section-title">ESG Investing, Sustainable Finance &amp; Nature Risk</h2>
+    <span class="section-count">6 companies</span>
+  </div>
+  <div class="reg-banner">
+    <strong>Regulatory drivers:</strong> CSRD (EU, mandatory 2024–2026 phased), TCFD (mandatory in UK, NZ, others), ISSB S1/S2 (global adoption accelerating), TNFD (voluntary but widely adopted), EU Taxonomy. All require asset-level environmental data that only EO can provide at scale.
+  </div>
+  <p class="section-desc" style="border-color:var(--cat-esg)">Financial institutions are the critical link between EO data and real-world sustainability outcomes: by pricing climate and nature risk correctly, they redirect capital away from stranded assets toward resilient, sustainable investments. These companies build the EO-backed data products that make that possible.</p>
+  <div class="card-grid">
+
+    <div class="card" style="--stripe:var(--cat-esg)">
+      <div class="card-head"><div><div class="company-name">Jupiter Intelligence</div><div class="company-geo">USA · San Mateo, CA</div></div></div>
+      <div class="tags"><span class="tag tag-reg">TCFD · CSRD · ISSB S2</span></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">ClimateScore Global: 22.3 billion location coverage, 22k+ metrics per location, 9 hazards — linking satellite-derived hazard data to financial loss estimates and avoided loss / adaptation ROI modeling. MRM-validated for bank model risk management.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Use Cases</div>
+      <div class="uses">Banks integrate climate into PD/LGD models and capital planning; insurers price policies to reflect true physical risk; real estate and infrastructure investors screen acquisitions against 30-year climate projections; companies meet CSRD ESRS E1 mandatory disclosure with asset-level science-backed evidence.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">MS&amp;AD Insurance</span><span class="chip">Arcadis</span><span class="chip">Financial services</span></div>
+    </div>
+
+    <div class="card" style="--stripe:var(--cat-esg)">
+      <div class="card-head"><div><div class="company-name">Sust Global</div><div class="company-geo">USA · San Francisco</div></div></div>
+      <div class="tags"><span class="tag tag-reg">TCFD · TNFD · CSRD</span></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">"Spatial finance" platform — satellite-derived land-surface and climate data married to financial analysis, scoring physical climate and nature-related risk at asset level across entire portfolios.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Use Cases</div>
+      <div class="uses">Asset managers integrate climate and nature risk into investment screens; PE firms conduct EO-backed climate due diligence; banks fulfill TCFD/CSRD disclosure with asset-level EO data; corporate treasury teams map climate exposure for double materiality CSRD assessments.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">Asset managers</span><span class="chip">PE firms</span><span class="chip">Corporate treasury</span></div>
+    </div>
+
+    <div class="card secondary" style="--stripe:var(--sec-border)">
+      <div class="card-head"><div><div class="company-name">MSCI (Sustainability &amp; Climate)</div><div class="company-geo">USA · New York — Global</div></div></div>
+      <div class="tags"><span class="tag tag-sec">⚠ Primary biz: financial data &amp; indices</span><span class="tag tag-reg">TNFD · CSRD · EU Taxonomy</span></div>
+      <div class="lbl">EO/AI Role</div>
+      <div class="tech">Integrates satellite-derived asset-level data into ESG Ratings, physical climate risk scores, and Nature &amp; Biodiversity Metrics — location-specific biodiversity footprint, deforestation exposure, and physical hazard metrics across 22.3B+ global locations.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Use Cases</div>
+      <div class="uses">Institutional investors integrate EO-backed climate and nature metrics into portfolio construction and stewardship; companies use MSCI's biodiversity footprint data for TNFD LEAP assessments; asset managers build Article 9 (SFDR) funds around climate-aligned indices; banks stress-test portfolios against physical climate scenarios using satellite-verified hazard data.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">Pension funds</span><span class="chip">Sovereign wealth funds</span><span class="chip">Asset managers globally</span></div>
+    </div>
+
+    <div class="card secondary" style="--stripe:var(--sec-border)">
+      <div class="card-head"><div><div class="company-name">Moody's (Climate Risk)</div><div class="company-geo">USA · New York — Global</div></div></div>
+      <div class="tags"><span class="tag tag-sec">⚠ Primary biz: credit ratings &amp; financial data</span><span class="tag tag-reg">TCFD · CSRD · Credit risk</span></div>
+      <div class="lbl">EO/AI Role</div>
+      <div class="tech">Integrates satellite and remote-sensing data into physical climate risk models providing asset-level forward-looking climate exposure and financial impact quantification; fuses EO-derived hazard data with credit ratings and ESG data (Vigeo Eiris) for integrated climate credit analytics.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Use Cases</div>
+      <div class="uses">Credit analysts assess climate exposure in corporate bond issuance; insurers conduct property-level hurricane and flood adaptation ROI analysis; banks perform climate stress tests on real estate and infrastructure loan books; corporates obtain independent physical risk assessments for TCFD/CSRD climate disclosures.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">Banks</span><span class="chip">Insurers</span><span class="chip">Corporate issuers</span><span class="chip">Asset managers</span></div>
+    </div>
+
+    <div class="card" style="--stripe:var(--cat-esg)">
+      <div class="card-head"><div><div class="company-name">Earth Finance (acq. Climate Engine)</div><div class="company-geo">USA · Seattle</div></div></div>
+      <div class="tags"><span class="tag tag-reg">CSRD · TCFD · Spatial finance</span></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">Spatial finance platform connecting satellite imagery and economic data to financial analysis — mapping climate risks to individual physical assets and supply chain nodes for corporate clients.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Use Cases</div>
+      <div class="uses">Corporations map climate exposure across global asset footprints for CSRD double materiality assessments; investors conduct EO-backed climate due diligence; companies quantify financial materiality of physical climate risk for ISSB S2 disclosures; boutique advisory for deep-dive climate transition planning.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">Corporates</span><span class="chip">Institutional investors</span></div>
+    </div>
+
+    <div class="card" style="--stripe:var(--cat-esg)">
+      <div class="card-head"><div><div class="company-name">AlphaGeo (formerly Climate Alpha)</div><div class="company-geo">Singapore</div></div></div>
+      <div class="tags"><span class="tag tag-reg">TCFD · TNFD · Real asset risk</span></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">AI-powered predictive analytics combining climate EO data with financial modeling to produce asset-level climate risk scores, resilience ratings, and financial impact estimates for real asset investment decisions.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Use Cases</div>
+      <div class="uses">Real estate investors screen acquisitions by satellite-backed climate resilience; infrastructure PE firms assess long-term asset stranding risk; insurance companies integrate EO climate scores into underwriting; banks stress-test real estate and infrastructure loan portfolios against future climate scenarios.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">Real estate funds</span><span class="chip">Infrastructure PE</span><span class="chip">Banks</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════ 11. MARITIME ════════ -->
+<section class="section" id="maritime">
+  <div class="section-header">
+    <span class="section-icon">🚢</span>
+    <h2 class="section-title">Maritime, Trade &amp; Ocean Monitoring</h2>
+    <span class="section-count">3 companies</span>
+  </div>
+  <p class="section-desc" style="border-color:var(--cat-maritime)">Satellite maritime monitoring enables enforcement of fishing regulations, detection of sanctions evasion (including by fossil fuel actors), and ocean health monitoring — sustainability use cases alongside commercial shipping intelligence.</p>
+  <div class="card-grid">
+
+    <div class="card" style="--stripe:var(--cat-maritime)">
+      <div class="card-head"><div><div class="company-name">Spire Global</div><div class="company-geo">USA · San Francisco</div></div></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">Radio-frequency sensing satellite constellation tracking AIS vessel signals globally; ML blends maritime, aviation, and weather data into intelligence products and data feeds.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Use Cases</div>
+      <div class="uses">Fisheries enforcement agencies detect illegal fishing vessels; commodity traders verify sanctions compliance in fossil fuel shipping; port regulators monitor vessel emissions in controlled areas; companies disclose Scope 3 shipping emissions using satellite-verified routing data.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">Commodity traders</span><span class="chip">Airlines</span><span class="chip">Port operators</span></div>
+    </div>
+
+    <div class="card spotlight" style="--stripe:var(--cat-maritime)">
+      <div class="card-head"><div><div class="company-name">Unseenlabs</div><div class="company-geo">France · Rennes</div></div></div>
+      <div class="tags"><span class="tag tag-sust">🌿 IUU fishing enforcement</span></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">CubeSat constellation detecting radio-frequency emissions from vessels that have disabled their AIS transponders — enabling detection of "dark" vessels operating outside regulatory oversight.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Impact</div>
+      <div class="uses">Government agencies detect illegal, unreported, and unregulated (IUU) fishing which depletes fish stocks and undermines legally compliant fisheries; maritime insurers identify high-risk vessels in conflict zones or conducting sanctions-evading dark voyages; enforcement of maritime protected areas from space.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">Navies</span><span class="chip">Maritime insurers</span><span class="chip">Fisheries regulators</span></div>
+    </div>
+
+    <div class="card" style="--stripe:var(--cat-maritime)">
+      <div class="card-head"><div><div class="company-name">Windward</div><div class="company-geo">Israel · Tel Aviv</div></div></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">AI platform fusing AIS vessel tracking, satellite imagery, and commercial data to generate behavioral risk profiles for individual vessels — detecting sanctions evasion, cargo manipulation, and illicit shipping patterns.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Use Cases</div>
+      <div class="uses">Banks comply with OFAC/EU sanctions screening for trade finance portfolios; commodity traders verify counterparty vessels are not linked to conflict-oil or sanctions evasion; shipping companies conduct ESG due diligence on charter parties; financial institutions screen vessels involved in fossil fuel sanctions evasion.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">Major banks</span><span class="chip">Commodity traders</span><span class="chip">Compliance teams</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════ 12. URBAN ════════ -->
+<section class="section" id="urban">
+  <div class="section-header">
+    <span class="section-icon">🏙️</span>
+    <h2 class="section-title">Urban Planning, Real Estate &amp; Social Equity</h2>
+    <span class="section-count">3 companies</span>
+  </div>
+  <p class="section-desc" style="border-color:var(--cat-urban)">EO-based urban analytics supports climate-just urban planning, identifies environmental inequity (heat island concentration in low-income areas), accelerates the solar energy transition, and provides real estate investors with satellite-backed environmental due diligence.</p>
+  <div class="card-grid">
+
+    <div class="card spotlight" style="--stripe:var(--cat-urban)">
+      <div class="card-head"><div><div class="company-name">Latitudo 40</div><div class="company-geo">Italy · Naples</div></div></div>
+      <div class="tags"><span class="tag tag-sust">🌿 Urban heat equity</span></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">AI applied to satellite imagery generating urban heat island maps, flood risk scores, green infrastructure assessments, and land-change detection — packaged as decision-ready intelligence for cities and real estate clients.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Impact</div>
+      <div class="uses">Cities identify neighborhoods most exposed to urban heat islands (often lower-income areas) to prioritize tree planting and cooling programs; urban planners model heat exposure for vulnerable populations; real estate developers assess site environmental risk; infrastructure owners prioritize resilience investments in highest-need areas.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">Municipalities</span><span class="chip">Real estate developers</span><span class="chip">Urban planners</span></div>
+    </div>
+
+    <div class="card" style="--stripe:var(--cat-urban)">
+      <div class="card-head"><div><div class="company-name">UrbanFootprint</div><div class="company-geo">USA · San Francisco</div></div></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">Cloud GIS platform fusing parcel-level land use, infrastructure, demographic, and EO-derived environmental data into scenario modeling tools for urban planning and climate resilience.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Use Cases</div>
+      <div class="uses">Utilities plan grid infrastructure investment to support electrification and EV adoption; cities assess climate vulnerability by neighborhood with demographic equity overlays; real estate investors screen land for development suitability; transport agencies model travel demand and emissions impacts of development patterns.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">PG&amp;E</span><span class="chip">California Energy Commission</span><span class="chip">Cities</span></div>
+    </div>
+
+    <div class="card" style="--stripe:var(--cat-urban)">
+      <div class="card-head"><div><div class="company-name">Nearmap</div><div class="company-geo">Australia / USA</div></div></div>
+      <div class="lbl">Core Technology</div>
+      <div class="tech">Frequent aerial imagery updated multiple times/year with AI-derived property attributes — roof type, solar panel presence, condition, HVAC — across millions of addresses via subscription API.</div>
+      <hr class="divider">
+      <div class="lbl">Sustainability Use Cases</div>
+      <div class="uses">Solar installers identify high-suitability rooftops at scale, accelerating renewable energy adoption; insurers detect property changes for accurate risk pricing; city planning departments track development activity without site visits; construction firms remotely monitor project site progress.</div>
+      <div class="clients-row"><span class="clients-lbl">Clients</span><span class="chip">Insurance companies</span><span class="chip">Solar installers</span><span class="chip">Municipalities</span></div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <span>AI/ML Earth Observation: Sustainability &amp; Commercial Landscape · May 2025 · Self-contained — no internet required to render</span>
+  <span>⚠ Amber = different primary business · 🌿 Green = primary sustainability mission · Blue tags = regulatory compliance</span>
+</footer>
+
+</body>
+</html>
