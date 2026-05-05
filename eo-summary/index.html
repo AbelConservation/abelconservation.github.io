@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EO Intelligence — Executive Summary | Abel Conservation LLC</title>
+<style>
+/* ── RESET ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+/* ── DESIGN TOKENS ── */
+:root {
+  --ink:        #141210;
+  --ink-mid:    #3a3430;
+  --ink-soft:   #6a6460;
+  --ink-faint:  #9a9490;
+  --parchment:  #f7f4ef;
+  --cream:      #fffefb;
+  --rule:       #ddd8d0;
+
+  /* Category accent strip colors */
+  --c-ag:         #2d6e42;
+  --c-water:      #1a5496;
+  --c-forest:     #265a2a;
+  --c-deforest:   #5a8a20;
+  --c-climate:    #7a3a18;
+  --c-insurance:  #5a3a9e;
+  --c-energy:     #a84a08;
+  --c-extract:    #7a3a10;
+  --c-supply:     #b04a18;
+  --c-esg:        #0e4872;
+  --c-maritime:   #0e5468;
+  --c-urban:      #4a5e1e;
+  --c-nature:     #1a6b5a;
+
+  --font-display: 'Didact Gothic', Georgia, 'Times New Roman', serif;
+  --font-body:    Georgia, 'Times New Roman', serif;
+  --font-ui:      'Trebuchet MS', 'Lucida Grande', Arial, sans-serif;
+  --font-mono:    'Courier New', Courier, monospace;
+}
+
+/* ── BASE ── */
+body {
+  background: var(--parchment);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── TOP BAR ── */
+.topbar {
+  background: var(--ink);
+  padding: 12px 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.topbar a {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #90c8a0;
+  text-decoration: none;
+}
+.topbar a:hover { text-decoration: underline; }
+.topbar-right a { color: #9a9490; }
+.topbar-right a:hover { color: #f7f4ef; }
+
+/* ── MASTHEAD ── */
+.masthead {
+  background: var(--cream);
+  border-bottom: 3px solid var(--ink);
+  padding: 64px 56px 52px;
+  position: relative;
+}
+.masthead::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--c-ag) 0px, var(--c-ag) 32px,
+    var(--c-water) 32px, var(--c-water) 64px,
+    var(--c-forest) 64px, var(--c-forest) 96px,
+    var(--c-climate) 96px, var(--c-climate) 128px,
+    var(--c-energy) 128px, var(--c-energy) 160px,
+    var(--c-esg) 160px, var(--c-esg) 192px,
+    var(--c-maritime) 192px, var(--c-maritime) 224px,
+    var(--c-nature) 224px, var(--c-nature) 256px
+  );
+}
+.kicker {
+  font-family: var(--font-ui);
+  font-size: 10.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.kicker::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+  max-width: 200px;
+}
+.masthead h1 {
+  font-family: var(--font-body);
+  font-size: clamp(30px, 4vw, 52px);
+  font-weight: normal;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  max-width: 820px;
+  margin-bottom: 24px;
+}
+.masthead h1 em {
+  font-style: italic;
+  color: var(--c-nature);
+}
+.masthead-meta {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+.meta-item {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  color: var(--ink-soft);
+  letter-spacing: 0.04em;
+}
+.meta-item strong {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 2px;
+  font-weight: normal;
+}
+.lede {
+  max-width: 780px;
+  font-size: 17px;
+  line-height: 1.75;
+  color: var(--ink-mid);
+  border-left: 3px solid var(--c-nature);
+  padding-left: 20px;
+}
+
+/* ── LAYOUT ── */
+.page-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 56px 80px;
+}
+
+/* ── INTRO SECTION ── */
+.intro {
+  padding: 52px 0 40px;
+  max-width: 820px;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 56px;
+}
+.intro p {
+  font-size: 15.5px;
+  line-height: 1.78;
+  color: var(--ink-mid);
+  margin-bottom: 18px;
+}
+.intro p:last-child { margin-bottom: 0; }
+
+/* ── SECTION HEADING ── */
+.section-label {
+  font-family: var(--font-ui);
+  font-size: 9.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}
+
+/* ── CATEGORY CARDS ── */
+.category-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+.cat-block {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 0;
+  border-bottom: 1px solid var(--rule);
+  padding: 40px 0;
+  position: relative;
+}
+.cat-block::before {
+  content: '';
+  position: absolute;
+  left: -56px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--cat-color, var(--rule));
+}
+
+/* left column */
+.cat-left {
+  padding-right: 36px;
+  border-right: 1px solid var(--rule);
+}
+.cat-icon {
+  font-size: 26px;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+.cat-title {
+  font-family: var(--font-body);
+  font-size: 17px;
+  font-weight: normal;
+  font-style: italic;
+  line-height: 1.3;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+.cat-count {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 12px;
+}
+.cat-desc {
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+}
+
+/* right column */
+.cat-right {
+  padding-left: 40px;
+}
+.use-cases-label {
+  font-family: var(--font-ui);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 14px;
+}
+
+/* Use case list */
+.uc-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.uc-item {
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  gap: 8px;
+  padding: 9px 0;
+  border-bottom: 1px solid #ece8e2;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--ink-mid);
+  align-items: start;
+}
+.uc-item:last-child { border-bottom: none; }
+.uc-arrow {
+  color: var(--cat-color, var(--ink-faint));
+  font-size: 12px;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+/* use case sub-tags */
+.uc-tag {
+  display: inline-block;
+  font-family: var(--font-ui);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  padding: 1px 6px;
+  margin-left: 6px;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+}
+.uc-tag.reg  { background: #e2ecfc; color: #0e3070; }
+.uc-tag.soc  { background: #e2f4ea; color: #1a5e30; }
+.uc-tag.ops  { background: #fef3e2; color: #7a4a08; }
+
+/* ── SUMMARY TABLE (compact) ── */
+.summary-section {
+  margin-top: 64px;
+  padding-top: 40px;
+  border-top: 3px solid var(--ink);
+}
+.summary-section h2 {
+  font-family: var(--font-body);
+  font-size: 26px;
+  font-weight: normal;
+  margin-bottom: 8px;
+}
+.summary-section .sub {
+  font-size: 14px;
+  color: var(--ink-soft);
+  margin-bottom: 28px;
+}
+.sum-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.sum-table th {
+  font-family: var(--font-ui);
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  text-align: left;
+  padding: 10px 14px;
+  border-bottom: 2px solid var(--ink);
+  background: var(--cream);
+}
+.sum-table td {
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+  color: var(--ink-mid);
+  line-height: 1.5;
+}
+.sum-table tr:last-child td { border-bottom: none; }
+.sum-table tr:hover td { background: #f0ede8; }
+.sum-cat {
+  font-style: italic;
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.sum-strip {
+  width: 4px;
+  padding: 0 !important;
+}
+
+/* ── REGULATORY SNAPSHOT ── */
+.reg-snap {
+  margin-top: 56px;
+  padding: 32px 36px;
+  background: var(--ink);
+  color: #c8c4be;
+  border-radius: 4px;
+}
+.reg-snap h3 {
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-weight: normal;
+  font-style: italic;
+  color: #f0ede8;
+  margin-bottom: 6px;
+}
+.reg-snap .sub {
+  font-size: 12.5px;
+  color: #78746e;
+  margin-bottom: 22px;
+  font-family: var(--font-ui);
+}
+.reg-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+.reg-item {
+  border-left: 2px solid #3a8a6a;
+  padding-left: 12px;
+}
+.reg-name {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #90c8a0;
+  margin-bottom: 4px;
+}
+.reg-desc {
+  font-size: 12px;
+  line-height: 1.55;
+  color: #9a9490;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--ink);
+  color: #5a5550;
+  padding: 24px 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  margin-top: 72px;
+}
+footer a { color: #90c8a0; text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .topbar, .masthead, .page-wrap, footer { padding-left: 22px; padding-right: 22px; }
+  .cat-block { grid-template-columns: 1fr; }
+  .cat-left { border-right: none; padding-right: 0; border-bottom: 1px solid var(--rule); padding-bottom: 20px; margin-bottom: 20px; }
+  .cat-right { padding-left: 0; }
+  .cat-block::before { left: -22px; }
+  .masthead h1 { font-size: 28px; }
+  .lede { font-size: 15px; }
+  .sum-table { font-size: 12px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── TOP BAR ── -->
+<div class="topbar">
+  <a href="/">← Abel Conservation LLC</a>
+  <span class="topbar-right"><a href="/eo-landscape/">Full Company Landscape →</a></span>
+</div>
+
+<!-- ── MASTHEAD ── -->
+<header class="masthead">
+  <div class="kicker">Abel Conservation LLC &nbsp;·&nbsp; Executive Summary of Commercial Use Cases</div>
+  <h1>AI/ML Earth Observation:<br><em>Use Cases for Sustainability &amp; Business Intelligence</em></h1>
+  <div class="masthead-meta">
+    <div class="meta-item"><strong>Published</strong>May 2026</div>
+    <div class="meta-item"><strong>Categories</strong>13 sectors</div>
+    <div class="meta-item"><strong>Scope</strong>Direct &amp; indirect EO applications</div>
+    <div class="meta-item"><strong>Focus</strong>Positive environmental &amp; social outcomes</div>
+  </div>
+  <p class="lede">A synthesis of how AI/ML-analyzed satellite data is being deployed across industries — both as a direct operational tool and as the underlying evidence base for environmental regulatory compliance, sustainability disclosure, and nature finance.</p>
+</header>
+
+<!-- ── MAIN ── -->
+<div class="page-wrap">
+
+  <!-- INTRO -->
+  <div class="intro">
+    <p>Earth observation (EO) — satellite imagery and remote sensing data analyzed by artificial intelligence — has matured from a defense and research technology into commercial infrastructure for environmental accountability. Across more than a dozen industry sectors, businesses are using AI-processed satellite data to make operational decisions, verify environmental commitments, meet rapidly expanding regulatory disclosure requirements and assess climate risks.</p>
+    <p>This summary categorizes key commercial use cases by sector, with emphasis on EXISTING platforms/services on the market that drive genuine environmental and social outcomes. EO is increasingly recognized as the only mechanism capable of providing continuous, scalable, and auditable environmental assessment and monitoring at the scale these obligations demand.</p>
+  </div>
+
+  <!-- SECTION LABEL -->
+  <div class="section-label">Use Cases by Sector</div>
+
+  <!-- ════ CATEGORY BLOCKS ════ -->
+  <div class="category-grid">
+
+    <!-- 1. AGRICULTURE -->
+    <div class="cat-block" style="--cat-color: var(--c-ag)">
+      <div class="cat-left">
+        <div class="cat-icon">🌾</div>
+        <div class="cat-title">Agriculture &amp; Food Supply Chains</div>
+        <div class="cat-count">8 platforms active</div>
+        <div class="cat-desc">Satellite crop monitoring replaces estimation with field-level evidence across the food value chain — enabling smarter sourcing decisions, verified sustainability claims, and financial access for previously unserved farmers.</div>
+      </div>
+      <div class="cat-right">
+        <div class="use-cases-label">Key use cases</div>
+        <ul class="uc-list">
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Trace Scope 3 agricultural emissions to specific sourcing geographies for mandatory disclosure, replacing estimation with satellite-verified primary data<span class="uc-tag reg">CSRD · SBTi</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Verify regenerative agriculture programs with EO-derived soil health and carbon removal metrics, enabling on-pack claims and registry-grade credits<span class="uc-tag soc">Nature</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Automate crop insurance claims triage using satellite field monitoring, eliminating manual inspection visits<span class="uc-tag ops">Ops</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Extend parametric insurance to smallholder farmers in Africa and Asia using rainfall and crop stress pixels to trigger automatic payouts<span class="uc-tag soc">Social</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Forecast crop yield shortfalls weeks before harvest using thermal water-stress data, enabling earlier supply chain response<span class="uc-tag ops">Ops</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Assess ag lending risk at field level using satellite yield history, unlocking credit for farmers invisible to formal finance<span class="uc-tag soc">Social</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Stress-test sourcing geographies against 10–30 year climate projections to proactively diversify supply chains before disruptions occur<span class="uc-tag ops">Ops</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Detect nutrient deficiencies via hyperspectral imagery to reduce fertilizer over-application and its downstream water pollution<span class="uc-tag soc">Nature</span></span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 2. WATER -->
+    <div class="cat-block" style="--cat-color: var(--c-water)">
+      <div class="cat-left">
+        <div class="cat-icon">💧</div>
+        <div class="cat-title">Water: Quality, Scarcity &amp; Infrastructure</div>
+        <div class="cat-count">5 platforms active</div>
+        <div class="cat-desc">Freshwater is the most material nature-related risk for water-intensive industries. Satellite water intelligence addresses both operational waste and regulatory water dependency disclosure under TNFD and CSRD.</div>
+      </div>
+      <div class="cat-right">
+        <div class="use-cases-label">Key use cases</div>
+        <ul class="uc-list">
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Detect underground pipe leaks using SAR satellite data — preventing loss of treated potable water (32 billion m³ lost globally per year) at 5–12x the speed of traditional acoustic methods<span class="uc-tag soc">Nature</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Monitor harmful algal blooms and water quality parameters in reservoirs and drinking water sources before they reach treatment plants<span class="uc-tag soc">Social</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Disclose water dependency and watershed stress as required by TNFD and CSRD nature reporting frameworks, using satellite-derived basin data<span class="uc-tag reg">TNFD · CSRD</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Optimize irrigation scheduling via daily evapotranspiration data, reducing agricultural water consumption in stressed basins<span class="uc-tag ops">Ops</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Monitor ground deformation near water utility infrastructure, mine tailings ponds, and reservoirs to detect failure risk before collapse<span class="uc-tag ops">Ops</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Map flood extent in near real-time to trigger parametric insurance payouts for communities in developing countries previously excluded from coverage<span class="uc-tag soc">Social</span></span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 3. FORESTS & CARBON -->
+    <div class="cat-block" style="--cat-color: var(--c-forest)">
+      <div class="cat-left">
+        <div class="cat-icon">🌳</div>
+        <div class="cat-title">Forests, Biodiversity &amp; Carbon MRV</div>
+        <div class="cat-count">5 platforms active</div>
+        <div class="cat-desc">Satellite-based forest monitoring replaces costly, infrequent field inventories with continuous, auditable evidence — foundational to both voluntary carbon markets and mandatory nature disclosure.</div>
+      </div>
+      <div class="cat-right">
+        <div class="use-cases-label">Key use cases</div>
+        <ul class="uc-list">
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Provide digital MRV (dMRV) for forest carbon credits, enabling corporate buyers to verify integrity before purchase — less than 30% of registry-approved projects pass rigorous EO screening<span class="uc-tag reg">Verra · ACR</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Reduce forest carbon credit issuance cost by replacing $100k+ manual field inventories with satellite-based biomass estimation, enabling more projects globally<span class="uc-tag ops">Ops</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Map forest type, condition, and habitat quality for Biodiversity Net Gain compliance and nature credit baselines<span class="uc-tag reg">BNG · TNFD</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Disclose deforestation-linked Scope 3 emissions and nature dependencies as required by CSRD and TNFD frameworks<span class="uc-tag reg">CSRD · TNFD</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Detect wildfires minutes after ignition using thermal infrared satellite constellation, enabling faster suppression and reducing total burned area<span class="uc-tag ops">Ops</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Screen financial investment portfolios for deforestation risk exposure using satellite land use data<span class="uc-tag reg">TNFD</span></span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 4. DEFORESTATION & EUDR -->
+    <div class="cat-block" style="--cat-color: var(--c-deforest)">
+      <div class="cat-left">
+        <div class="cat-icon">🚫</div>
+        <div class="cat-title">Deforestation-Free Supply Chains &amp; EUDR</div>
+        <div class="cat-count">3 platforms active</div>
+        <div class="cat-desc">The EU Deforestation Regulation (EUDR) mandates satellite-verifiable proof that 7 commodity groups are deforestation-free. EO is the only scalable mechanism to achieve continuous compliance across thousands of supplier plots.</div>
+      </div>
+      <div class="cat-right">
+        <div class="use-cases-label">Key use cases</div>
+        <ul class="uc-list">
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Produce audit-ready due diligence statements for EUDR compliance across cattle, cocoa, coffee, palm oil, rubber, soy, and wood supply chains<span class="uc-tag reg">EUDR mandatory</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Generate real-time deforestation alerts linked to specific supplier plots, enabling procurement teams to act before reputational or legal exposure materializes<span class="uc-tag ops">Ops</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Verify zero-deforestation voluntary commitments with independent satellite evidence — replacing self-reported supplier declarations<span class="uc-tag soc">Nature</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Screen supply chain financing portfolios for EUDR exposure on behalf of trade finance banks and commodity lenders<span class="uc-tag reg">EUDR</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Provide open-access forest monitoring data to governments and NGOs in developing countries, democratizing access to satellite monitoring<span class="uc-tag soc">Social</span></span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 5. CLIMATE RISK -->
+    <div class="cat-block" style="--cat-color: var(--c-climate)">
+      <div class="cat-left">
+        <div class="cat-icon">🌡️</div>
+        <div class="cat-title">Climate &amp; Physical Risk Analytics</div>
+        <div class="cat-count">5 platforms active</div>
+        <div class="cat-desc">Satellite-grounded physical climate risk analytics are now mandatory inputs to regulatory disclosure and increasingly embedded in financial decision-making — redirecting capital toward resilient assets.</div>
+      </div>
+      <div class="cat-right">
+        <div class="use-cases-label">Key use cases</div>
+        <ul class="uc-list">
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Provide asset-level physical risk scores (flood, wildfire, heat, drought, wind) across millions of locations for mandatory CSRD ESRS E1 and TCFD disclosure<span class="uc-tag reg">CSRD · TCFD · ISSB S2</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Integrate satellite-derived hazard data into bank loan pricing models (PD/LGD), directing capital away from chronically climate-exposed assets<span class="uc-tag ops">Ops</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Enable real estate and infrastructure investors to screen acquisitions against 30-year climate projections before committing capital<span class="uc-tag ops">Ops</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Support adaptation investment planning by quantifying avoided-loss ROI from climate resilience measures using satellite-backed hazard baselines<span class="uc-tag ops">Ops</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Optimize logistics, aviation, and grid operations using hyper-local weather and climate forecasts from satellite-sensing constellations, reducing fuel waste and outage risk<span class="uc-tag ops">Ops</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Produce probabilistic global flood maps at 30m resolution for reinsurers and infrastructure developers to improve catastrophe models and site selection<span class="uc-tag ops">Ops</span></span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 6. INSURANCE -->
+    <div class="cat-block" style="--cat-color: var(--c-insurance)">
+      <div class="cat-left">
+        <div class="cat-icon">🛡️</div>
+        <div class="cat-title">Insurance &amp; Reinsurance</div>
+        <div class="cat-count">4 platforms active</div>
+        <div class="cat-desc">EO enables faster, fairer, and more accurate insurance — accelerating post-disaster claims, building parametric products that expand coverage to excluded populations, and improving risk pricing that incentivizes resilience.</div>
+      </div>
+      <div class="cat-right">
+        <div class="use-cases-label">Key use cases</div>
+        <ul class="uc-list">
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Map disaster damage extent (flood, wildfire, storm) within hours via SAR satellite, accelerating claims decisions from weeks to days and reducing financial distress for affected communities<span class="uc-tag soc">Social</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Automate property condition assessment using aerial/satellite imagery and deep learning, eliminating unnecessary physical inspection trips<span class="uc-tag ops">Ops</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Price wildfire risk accurately at property level, creating economic incentives for homeowners to harden structures and clear defensible space<span class="uc-tag soc">Social</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Design ESG-linked parametric farm insurance products rewarding regenerative farming practices and verified soil health improvements<span class="uc-tag soc">Nature</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Monitor commercial real estate portfolio conditions remotely for underwriting, collateral assessment, and maintenance prioritization<span class="uc-tag ops">Ops</span></span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 7. ENERGY & GRID -->
+    <div class="cat-block" style="--cat-color: var(--c-energy)">
+      <div class="cat-left">
+        <div class="cat-icon">⚡</div>
+        <div class="cat-title">Energy, Utilities &amp; Grid Infrastructure</div>
+        <div class="cat-count">4 platforms active</div>
+        <div class="cat-desc">EO supports the energy transition by preventing wildfire-ignited outages, independently verifying GHG emissions claims, and tracking renewable energy build-out progress against national commitments.</div>
+      </div>
+      <div class="cat-right">
+        <div class="use-cases-label">Key use cases</div>
+        <ul class="uc-list">
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Direct vegetation trimming crews to highest-risk power corridor locations using satellite monitoring, preventing wildfire ignitions from line contact<span class="uc-tag soc">Nature</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Detect and quantify fugitive methane leaks at individual facility level — methane is 80× more potent than CO₂ over 20 years — enabling rapid repair<span class="uc-tag soc">Nature</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Provide regulators and investors with independent satellite-based verification of oil &amp; gas operator methane self-reports, holding operators accountable beyond disclosure<span class="uc-tag reg">EU Methane Reg · CSRD</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Track real-world energy transition progress (solar/wind buildout, coal plant activity) against national climate pledges using satellite imagery<span class="uc-tag reg">Paris Agreement</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Provide independent verification of oil inventory and production data, reducing information asymmetry in energy commodity markets<span class="uc-tag ops">Ops</span></span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 8. EXTRACTIVES -->
+    <div class="cat-block" style="--cat-color: var(--c-extract)">
+      <div class="cat-left">
+        <div class="cat-icon">⛏️</div>
+        <div class="cat-title">Extractives, Mining &amp; Oil &amp; Gas — Environmental Accountability</div>
+        <div class="cat-count">5 platforms active</div>
+        <div class="cat-desc">Satellite monitoring constrains environmental damage from extractive industries — detecting failures before they become disasters, verifying rehabilitation commitments, and independently tracking emissions against reported figures.</div>
+      </div>
+      <div class="cat-right">
+        <div class="use-cases-label">Key use cases</div>
+        <ul class="uc-list">
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Monitor tailings dam stability using ground-penetrating SAR satellite data, providing early warning of deformation before catastrophic failure threatens downstream communities<span class="uc-tag soc">Social</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Detect illegal and artisanal mining encroachments in protected areas and indigenous territories, enabling enforcement<span class="uc-tag soc">Social</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Verify that mining companies fulfill land rehabilitation obligations to restore sites to pre-mining ecological condition<span class="uc-tag reg">Regulatory</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Detect terrain movement threatening pipeline integrity before spills occur, preventing contamination of waterways downstream<span class="uc-tag ops">Ops</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Provide ESG investors with independent satellite emissions data to identify operators with poor methane management for screening and engagement<span class="uc-tag reg">CSRD · EU Methane Reg</span></span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 9. SUPPLY CHAINS -->
+    <div class="cat-block" style="--cat-color: var(--c-supply)">
+      <div class="cat-left">
+        <div class="cat-icon">📦</div>
+        <div class="cat-title">Supply Chain Transparency &amp; Commodity Intelligence</div>
+        <div class="cat-count">4 platforms active</div>
+        <div class="cat-desc">EO-based supply chain intelligence enables companies to verify supplier environmental claims, detect upstream violations, and anticipate climate-related disruptions before they cascade into shortages or reputational damage.</div>
+      </div>
+      <div class="cat-right">
+        <div class="use-cases-label">Key use cases</div>
+        <ul class="uc-list">
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Verify zero-deforestation and sustainability commitments at supplier field level with continuous satellite monitoring — replacing annual audit cycles<span class="uc-tag reg">EUDR · CSRD</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Monitor crop and raw material health at upstream supplier locations to detect supply disruptions before they reach procurement<span class="uc-tag ops">Ops</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Track satellite-verified economic activity (port throughput, manufacturing output) as independent alternative data signals for commodity market intelligence<span class="uc-tag ops">Ops</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Assess environmental conditions at collateral locations (crop fields, natural assets, infrastructure) for green and sustainability-linked lending decisions<span class="uc-tag reg">Green finance</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Track food security situations and humanitarian supply disruptions using satellite harvest monitoring, enabling earlier multilateral response<span class="uc-tag soc">Social</span></span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 10. ESG & FINANCE -->
+    <div class="cat-block" style="--cat-color: var(--c-esg)">
+      <div class="cat-left">
+        <div class="cat-icon">📊</div>
+        <div class="cat-title">ESG Investing, Sustainable Finance &amp; Nature Risk</div>
+        <div class="cat-count">6 platforms active</div>
+        <div class="cat-desc">Financial institutions are the critical link between EO data and real-world sustainability outcomes: by pricing climate and nature risk correctly, they redirect capital toward resilient, sustainable investments. Multiple mandatory frameworks now require EO-grade data.</div>
+      </div>
+      <div class="cat-right">
+        <div class="use-cases-label">Key use cases</div>
+        <ul class="uc-list">
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Integrate satellite-derived asset-level climate risk scores into bank loan pricing (PD/LGD), stress testing, and capital planning for regulatory compliance<span class="uc-tag reg">TCFD · CSRD · ISSB S2</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Conduct climate and nature due diligence on acquisitions using satellite-backed physical risk and biodiversity footprint data<span class="uc-tag ops">Ops</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Build Article 9 (SFDR) funds and climate-aligned indices using EO-backed climate risk metrics and biodiversity data as portfolio construction inputs<span class="uc-tag reg">SFDR · EU Taxonomy</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Map corporate climate exposure across global physical asset and supply chain footprints for CSRD double materiality assessments<span class="uc-tag reg">CSRD</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Assess nature dependencies and biodiversity footprint for TNFD LEAP framework disclosures, using location-specific EO ecosystem condition data<span class="uc-tag reg">TNFD</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Independently verify corporate emissions claims for bond issuance, green loan disbursements, and sustainability-linked financing KPI compliance<span class="uc-tag reg">Green bonds</span></span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 11. MARITIME -->
+    <div class="cat-block" style="--cat-color: var(--c-maritime)">
+      <div class="cat-left">
+        <div class="cat-icon">🚢</div>
+        <div class="cat-title">Maritime, Trade &amp; Ocean Monitoring</div>
+        <div class="cat-count">3 platforms active</div>
+        <div class="cat-desc">Satellite maritime monitoring enables enforcement of fishing regulations, detection of illicit fossil fuel shipping, and ocean health monitoring — sustainability applications alongside commercial intelligence.</div>
+      </div>
+      <div class="cat-right">
+        <div class="use-cases-label">Key use cases</div>
+        <ul class="uc-list">
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Detect vessels that have disabled AIS transponders to conduct illegal, unreported, and unregulated (IUU) fishing, depleting fish stocks outside regulatory oversight<span class="uc-tag soc">Nature</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Screen vessel behavioral profiles for sanctions evasion and illicit fossil fuel shipping for bank trade finance compliance<span class="uc-tag reg">OFAC · EU Sanctions</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Monitor vessel emissions in port-controlled emission areas and verify Scope 3 shipping emissions for corporate disclosure<span class="uc-tag reg">CSRD</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Enforce marine protected area boundaries from space, detecting unauthorized vessels within designated conservation zones<span class="uc-tag soc">Nature</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Track global commodity shipping flows and port congestion as independent economic signals for supply chain resilience planning<span class="uc-tag ops">Ops</span></span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 12. URBAN -->
+    <div class="cat-block" style="--cat-color: var(--c-urban)">
+      <div class="cat-left">
+        <div class="cat-icon">🏙️</div>
+        <div class="cat-title">Urban Planning, Real Estate &amp; Social Equity</div>
+        <div class="cat-count">3 platforms active</div>
+        <div class="cat-desc">EO-based urban analytics reveals environmental inequity, supports climate-just planning, accelerates solar adoption, and provides real estate investors with satellite-backed environmental due diligence.</div>
+      </div>
+      <div class="cat-right">
+        <div class="use-cases-label">Key use cases</div>
+        <ul class="uc-list">
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Map urban heat island intensity by neighborhood — often concentrated in lower-income areas — to prioritize tree planting and cooling investments equitably<span class="uc-tag soc">Social</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Identify high-suitability rooftops for solar panel installation at city scale, accelerating residential renewable energy adoption<span class="uc-tag soc">Nature</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Model climate vulnerability and flood risk by neighborhood with demographic equity overlays to prioritize resilience investments in highest-need areas<span class="uc-tag soc">Social</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Plan utility grid infrastructure investment to support electrification and EV adoption using EO-derived land use and population data<span class="uc-tag ops">Ops</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span>Screen real estate acquisitions and development sites against satellite-derived environmental risk data — flood exposure, wildfire proximity, land subsidence<span class="uc-tag ops">Ops</span></span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 13. NATURE FINANCE -->
+    <div class="cat-block" style="--cat-color: var(--c-nature)">
+      <div class="cat-left">
+        <div class="cat-icon">🌊</div>
+        <div class="cat-title">Nature Finance Instruments &amp; EO-Backed Verification</div>
+        <div class="cat-count">8 platforms &amp; initiatives</div>
+        <div class="cat-desc">A USD 700 billion annual financing gap exists to reverse biodiversity loss by 2030. Across biodiversity credits, blue bonds, debt-for-nature swaps, green bonds, and payments for ecosystem services, EO is rapidly becoming foundational infrastructure for instrument verification and integrity.</div>
+      </div>
+      <div class="cat-right">
+        <div class="use-cases-label">Key use cases — by instrument type</div>
+        <ul class="uc-list">
+          <li class="uc-item"><span class="uc-arrow">→</span><span><strong>Biodiversity Credits:</strong> Satellite habitat mapping establishes measurable baselines; ongoing EO monitoring verifies biodiversity uplift over 20–50 year credit periods, preventing greenwashing and replacing costly field surveys<span class="uc-tag soc">Nature</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span><strong>Blue Bonds / Debt-for-Nature Swaps:</strong> Satellite ocean and land monitoring verifies compliance with Marine Protected Area covenants embedded in sovereign debt refinancing deals — required for conservation fund disbursements to governments<span class="uc-tag reg">Sovereign debt</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span><strong>Green &amp; Nature Performance Bonds:</strong> Independent satellite-derived KPI data (deforestation rates, ecosystem health) verifies bond reporting and performance-linked coupon step-downs without reliance on issuer self-reporting<span class="uc-tag reg">Green bonds · ICMA</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span><strong>Payments for Ecosystem Services (PES):</strong> EO verifies continued provision of services (carbon sequestration, watershed protection) tied to payment disbursements, removing dependence on landowner self-reported data<span class="uc-tag soc">Nature</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span><strong>TNFD Disclosure:</strong> Location-specific EO data on ecosystem condition, biodiversity intactness, and dependency mapping underpins the TNFD LEAP framework assessments that financial institutions and corporates must disclose<span class="uc-tag reg">TNFD · GBF</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span><strong>Habitat Banks:</strong> Satellite-based monitoring of restored and conserved habitats provides continuous, auditable evidence for biodiversity credit issuance, enabling secondary market trading of credits<span class="uc-tag ops">Ops</span></span></li>
+          <li class="uc-item"><span class="uc-arrow">→</span><span><strong>Nature Risk Integration in Finance:</strong> EO-derived biodiversity footprint and nature dependency data enables financial institutions to integrate nature risk into investment screens, stress tests, and climate-related disclosure<span class="uc-tag reg">CSRD · TNFD · SFDR</span></span></li>
+        </ul>
+      </div>
+    </div>
+
+  </div><!-- /category-grid -->
+
+  <!-- REGULATORY SNAPSHOT -->
+  <div class="reg-snap">
+    <h3>Key Regulatory Frameworks Driving EO Adoption</h3>
+    <div class="sub">Mandatory and voluntary disclosure requirements creating institutional demand for satellite-grade environmental data</div>
+    <div class="reg-grid">
+      <div class="reg-item">
+        <div class="reg-name">CSRD (EU)</div>
+        <div class="reg-desc">Corporate Sustainability Reporting Directive — mandatory for ~50,000 EU companies (phased 2024–2026). Requires asset-level physical climate risk and nature impact data across ESRS E1–E5.</div>
+      </div>
+      <div class="reg-item">
+        <div class="reg-name">TCFD</div>
+        <div class="reg-desc">Task Force on Climate-related Financial Disclosures — mandatory in UK, NZ, Singapore, and others. Physical risk assessment requires location-specific hazard data that EO provides.</div>
+      </div>
+      <div class="reg-item">
+        <div class="reg-name">TNFD</div>
+        <div class="reg-desc">Taskforce on Nature-related Financial Disclosures — voluntary but rapidly adopted. LEAP framework requires location-specific biodiversity and ecosystem condition data — EO's core output.</div>
+      </div>
+      <div class="reg-item">
+        <div class="reg-name">EUDR</div>
+        <div class="reg-desc">EU Deforestation Regulation — mandatory Dec 2025 (large co.) / June 2026 (SMEs). Requires satellite-verifiable deforestation-free due diligence for 7 commodity groups.</div>
+      </div>
+      <div class="reg-item">
+        <div class="reg-name">ISSB S1 / S2</div>
+        <div class="reg-desc">International Sustainability Standards Board — global baseline sustainability disclosure standards being adopted across major economies. Builds on TCFD; physical risk data requirements are identical.</div>
+      </div>
+      <div class="reg-item">
+        <div class="reg-name">EU Methane Regulation</div>
+        <div class="reg-desc">Mandatory monitoring and reporting of methane emissions for oil, gas, and coal operators in the EU — independent satellite verification increasingly used to validate self-reports.</div>
+      </div>
+      <div class="reg-item">
+        <div class="reg-name">GBF / Kunming-Montreal</div>
+        <div class="reg-desc">Global Biodiversity Framework — 196 nations committed to protect 30% of land and sea by 2030 (30x30). Nature finance instruments and TNFD disclosures operationalize private sector contributions.</div>
+      </div>
+      <div class="reg-item">
+        <div class="reg-name">Biodiversity Net Gain (UK)</div>
+        <div class="reg-desc">Mandatory since Feb 2024 — all English planning permissions require a 10% biodiversity increase, verified via standardized habitat metrics that EO-based mapping can support at scale.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /page-wrap -->
+
+<footer>
+  <span>© 2026 Abel Conservation LLC · All rights reserved</span>
+  <span>
+    <a href="/">Home</a> &nbsp;·&nbsp;
+    <a href="/eo-landscape/">Full Company Landscape</a>
+  </span>
+</footer>
+
+</body>
+</html>
